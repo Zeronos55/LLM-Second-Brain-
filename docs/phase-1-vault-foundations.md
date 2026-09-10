@@ -2,7 +2,7 @@
 
 Parent plan: [Obsidian + Local LLM + MCP — Build Plan](obsidian-local-llm-mcp-plan.md)
 
-**Context for this phase:** vault is starting fresh (little/nothing to migrate). Taxonomy is designed as a general study vault that's actuarial-heavy in practice — the folder/tag structure is topic-based, not tied to SOA/CAS exam codes, so it holds up if the subject mix shifts later.
+**Context for this phase:** the vault itself is starting fresh, but there's a backlog of annotated notes/tutorials/workshops from previous semesters (iPad, GoodNotes) to bring in — see [Importing Legacy Annotated Notes](phase-1-import-legacy-notes.md) for that pipeline; it lands under `Attachments/Legacy/` and `MOCs/Legacy/`, separate from the structure below until individual notes are atomized into it. Taxonomy here is designed as a general study vault that's actuarial-heavy in practice — the folder/tag structure is topic-based, not tied to SOA/CAS exam codes, so it holds up if the subject mix shifts later.
 
 **No new tools required.** Everything below uses Obsidian's built-in core plugins (Templates, and optionally Daily Notes) — no community plugins, no Ollama, nothing external. The point of Phase 1 is that it's cheap to get right before the AI layer starts depending on it.
 
@@ -53,8 +53,9 @@ Field rules:
 | `status` | no | one of `seedling` / `growing` / `evergreen` — how settled the note's understanding is; useful later for "what needs review" queries |
 | `aliases` | no | array — alternate names/notation for the same concept (e.g. `[Wiener process]` on a Brownian Motion note), so links and search catch synonyms |
 | `related` | no | array of `[[wikilinks]]` to adjacent atomic notes, when the link doesn't already appear naturally in the note body |
+| `source` | no | `[[wikilink]]` or plain text citing where the note's content came from — a textbook chapter, or a legacy scan when the note was atomized from imported material (see [Importing Legacy Annotated Notes](phase-1-import-legacy-notes.md)) |
 
-Keep it to these seven fields. Resist adding more — every extra required field is friction against actually writing notes, and Phase 1's whole point is a structure light enough to sustain.
+Keep it to these eight fields. Resist adding more — every extra required field is friction against actually writing notes, and Phase 1's whole point is a structure light enough to sustain.
 
 ## 3. Tagging taxonomy
 
