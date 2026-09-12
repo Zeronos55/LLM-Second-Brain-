@@ -37,7 +37,7 @@ Every note under `Study/` and `MOCs/` gets this frontmatter at minimum:
 ```yaml
 ---
 tags: [stochastic-processes, martingale]
-created: 2026-09-10
+created: 10/09/2026
 summary: A martingale is a stochastic process whose conditional expected future value equals its present value.
 ---
 ```
@@ -47,9 +47,9 @@ Field rules:
 | Field | Required | Rule |
 |---|---|---|
 | `tags` | yes | array, kebab-case, lowercase — see §3 for the taxonomy discipline |
-| `created` | yes | `YYYY-MM-DD`, set once, never edited |
+| `created` | yes | `DD/MM/YYYY`, set once, never edited |
 | `summary` | yes | one sentence, <160 chars, written so it stands alone in a search result |
-| `updated` | no | `YYYY-MM-DD`, bump when the note's content materially changes (not typo fixes) |
+| `updated` | no | `DD/MM/YYYY`, bump when the note's content materially changes (not typo fixes) |
 | `status` | no | one of `seedling` / `growing` / `evergreen` — how settled the note's understanding is; useful later for "what needs review" queries |
 | `aliases` | no | array — alternate names/notation for the same concept (e.g. `[Wiener process]` on a Brownian Motion note), so links and search catch synonyms |
 | `related` | no | array of `[[wikilinks]]` to adjacent atomic notes, when the link doesn't already appear naturally in the note body |
