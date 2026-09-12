@@ -21,9 +21,9 @@ source: "Google Drive — Sem2, Sem4, Sem5, Sem7 (Unzipped Files) folders"
 | Sem4 | Life Contingencies I, Introduction to Statistics, Derivative Securities | 55 | 6 | 1 (Derivative Securities) | 2 |
 | Sem5 | Mathematical Methods, Life Contingencies 2, Derivative Securities 2 | 70 | 7 | 0 | 2 |
 | Sem7 | Stochastic Processes, Simulation and Credibility Theory, Regression Analysis, Ratemaking and Loss Reserving | 69 | 8 | 1 (Simulation and Credibility Theory — Tutorial 4 only, see below) | 1 |
-| **Total** | **14 courses** | **284** | **29** | **3 open** (1 resolved as a false alarm) | **6 open** (1 resolved — trashed) |
+| **Total** | **14 courses** | **284** | **29** (2 resolved 2026-09-13 — see Probability) | **3 open** (1 resolved as a false alarm) | **6 open** (1 resolved — trashed) |
 
-**Update (2026-09-12):** two items from this table have already been resolved — see the Simulation and Credibility Theory and Life Contingencies 2 sections below.
+**Update (2026-09-12 to 2026-09-13):** several items from this table have already been resolved by re-uploading flagged files directly — see the Probability, Simulation and Credibility Theory, and Life Contingencies 2 sections below.
 
 29 oversized files is a much bigger backlog than Sem1's 5 — worth knowing before deciding how to handle the "revisit with a plan later" step, since it won't be a quick one-off.
 
@@ -39,9 +39,9 @@ Also: **the original `.zip` files are still sitting in Drive alongside every unz
 - **Naming quirk (not a confirmed duplicate):** `Tutorial 10 ... student 2.pdf`, `Tutorial 4 ... student 2.pdf`, `Lecture 1_updated 2.pdf` carry a stray " 2" in the filename but no un-suffixed counterpart exists alongside them — most likely just how the provider named the file, not a re-upload. No action needed.
 
 ### Probability (26 files)
-- **Oversized (>10MB):**
-  - `Chapter 5 - Functions of Random Variables.pdf` — 13,363,082 bytes (~12.7MB)
-  - `Chapter 2 - Lecture class PPT slide.pdf` — 11,118,846 bytes (~10.6MB)
+- **Oversized, both now resolved — re-uploaded directly and read in full on 2026-09-13:**
+  - `Chapter 5 - Functions of Random Variables.pdf` (13,363,082 bytes, ~12.7MB) — confirmed via title page: method of distribution functions (CDF method), method of transformations, moment-generating functions.
+  - `Chapter 2 - Lecture class PPT slide.pdf` (11,118,846 bytes, ~10.6MB) — confirmed: "Discrete Random Variables and Their Probability Distributions" (random variables, probability mass function, cumulative mass function). This is the same topic as `Chapter 2 - Discrete Random Variable.pdf` in the same folder — **resolves the "possible duplicate/overlap" concern below as likely correct**: these two Chapter 2 files cover the same material (lecture-slide version vs. a separate notes version), not distinct sub-topics.
 - **Gap flagged:** Tutorials 7–13 present (as `Tutorial_N`) plus `MAT1034 Tutorial 1`/`Tutorial 2` — **Tutorials 3–6 appear missing** under either naming scheme.
 - **Duplicates flagged:**
   - Two "Chapter 1" files: `Chapter 1-Intro to Prob.pdf` (6.1MB) and `Chapter 1 - Probability.pdf` (1.0MB) — different sizes, likely two versions/drafts of the same chapter, not confirmed identical.
