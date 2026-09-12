@@ -20,8 +20,10 @@ source: "Google Drive — Sem2, Sem4, Sem5, Sem7 (Unzipped Files) folders"
 | Sem2 | Business Finance, Probability, Theory of Interest, Advanced Calculus | 90 | 8 | 1 (Business Finance) | 2 |
 | Sem4 | Life Contingencies I, Introduction to Statistics, Derivative Securities | 55 | 6 | 1 (Derivative Securities) | 2 |
 | Sem5 | Mathematical Methods, Life Contingencies 2, Derivative Securities 2 | 70 | 7 | 0 | 2 |
-| Sem7 | Stochastic Processes, Simulation and Credibility Theory, Regression Analysis, Ratemaking and Loss Reserving | 69 | 8 | 1 (Simulation and Credibility Theory — significant) | 1 |
-| **Total** | **14 courses** | **284** | **29** | **3** | **7** |
+| Sem7 | Stochastic Processes, Simulation and Credibility Theory, Regression Analysis, Ratemaking and Loss Reserving | 69 | 8 | 1 (Simulation and Credibility Theory — Tutorial 4 only, see below) | 1 |
+| **Total** | **14 courses** | **284** | **29** | **3 open** (1 resolved as a false alarm) | **6 open** (1 resolved — trashed) |
+
+**Update (2026-09-12):** two items from this table have already been resolved — see the Simulation and Credibility Theory and Life Contingencies 2 sections below.
 
 29 oversized files is a much bigger backlog than Sem1's 5 — worth knowing before deciding how to handle the "revisit with a plan later" step, since it won't be a quick one-off.
 
@@ -103,7 +105,7 @@ Also: **the original `.zip` files are still sitting in Drive alongside every unz
   - `Mock Exam_Set 2.pdf` — 11,957,161 bytes (~12.0MB)
   - `Tutorial_5_ASC2024_Life_Contingencies_II.pdf` — 11,171,097 bytes (~11.2MB)
   - `Practice 1.pdf` — 10,580,471 bytes (~10.6MB)
-- **Flagged for confirmation (possible misfile):** `LIFE CONTINGENCIES I FORMULA LIST_ANSWER.pdf` and `LIFE CONTINGENCIES I FORMULA LIST_ACTIVITY SHEET.pdf` are both filed inside the **Life Contingencies 2** folder despite their filenames saying "LIFE CONTINGENCIES I" — could be intentional reference carry-over material, or could be misfiled from the LC1 folder. Worth a quick confirm from you.
+- **Resolved — removed:** `LIFE CONTINGENCIES I FORMULA LIST_ANSWER.pdf` and `LIFE CONTINGENCIES I FORMULA LIST_ACTIVITY SHEET.pdf` were confirmed as misfiled duplicates (LC1 content sitting in the LC2 folder) and trashed on 2026-09-12 (reversible — sitting in Drive's bin, not permanently deleted).
 - **Gap check:** Tutorials 1–6 and Chapters 1–6 both complete.
 
 ### Derivative Securities 2 (21 files)
@@ -130,7 +132,8 @@ Also: **the original `.zip` files are still sitting in Drive alongside every unz
   - `ASC3014 Tutorial 3 - Techniques for Simulating Distributions and Processes.pdf` — 13,731,091 bytes (~13.7MB)
   - `ASC3014 Tutorial 7 - Limited Fluctuation Credibility.pdf` — 11,121,355 bytes (~11.1MB)
   - `ASC3014 Tutorial 5 - Simulation in Actuarial Modelling.pdf` — 11,005,029 bytes (~11.0MB)
-- **Gap flagged — significant:** Chapters present are only 1, 6, 7, 8, 9 — **Chapters 2, 3, 4, 5 appear missing entirely.** Tutorial 4 is also missing (Tutorials 1, 2, 3, 5, 6, 7, 8, 9 present). This is the clearest "did I actually upload everything" flag in the whole audit — worth double-checking your GoodNotes export for this course specifically.
+- **Gap flagged, then resolved:** Chapters present as standalone files are only 1, 6, 7, 8, 9 — but opening `ASC3014 Part I - Simulation.pdf` (4.08MB, well under the size limit) confirmed its table of contents covers **Chapters 1–5** (Random Numbers, Simulating Random Variables, Techniques for Simulating Distributions & Processes, Variance Reduction Techniques, Simulation in Actuarial Modelling) as one combined 123-page document — matching the course's own "Simulation" + "Credibility Theory" split (Ch1–5 bundled together, Ch6–9 issued as separate chapter files). **Not a missing-upload gap**, just a different packaging for the first half of the course.
+- **Still an open gap:** **Tutorial 4 is missing** (Tutorials 1, 2, 3, 5, 6, 7, 8, 9 present) — this one wasn't resolved by the Part I file, since that's chapter content, not a tutorial. Worth checking your export for this specifically.
 
 ### Regression Analysis (15 files)
 - **Oversized (>10MB):**
