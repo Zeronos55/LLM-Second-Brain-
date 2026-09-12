@@ -7,7 +7,7 @@ source: "Google Drive — Sem1/Calculus (Unzipped Files)/Calculus"
 
 # Calculus (MAT1014) — Legacy Catalog (Sem1)
 
-**Methodology:** chapter topics were confirmed by actually opening the readable lecture-notes/tutorial files and cross-referencing tutorial numbers against chapter numbers (Tutorial *N* consistently maps to Chapter *N* in this course). Confirmed: **Chapter 1 = Limits and Continuity**, **Chapter 4 = Integrals**, **Chapter 5 = Techniques of Integration and its Applications**. Chapter 2 and Chapter 3 lecture notes are both oversized and Tutorial 3 hit repeated connector errors on download — their topics are marked unconfirmed below (standard calculus sequencing after Ch1/before Ch4-Integrals strongly suggests differentiation, but this is *not* content-verified, so it's flagged rather than asserted).
+**Methodology:** chapter topics were confirmed by actually opening the readable lecture-notes/tutorial files and cross-referencing tutorial numbers against chapter numbers (Tutorial *N* consistently maps to Chapter *N* in this course). Confirmed: **Chapter 1 = Limits and Continuity**, **Chapter 2 = Differentiation** (rules, product/quotient/chain rule, trig/log/inverse-trig/hyperbolic derivatives, implicit differentiation, parametric equations — confirmed 2026-09-13 by reading the full 34-page file, re-uploaded directly), **Chapter 4 = Integrals**, **Chapter 5 = Techniques of Integration and its Applications**. Chapter 3 lecture notes are still oversized and Tutorial 3 still hits repeated connector errors on download — Chapter 3's topic is marked unconfirmed below (standard sequencing between Ch2-Differentiation and Ch4-Integrals strongly suggests applications of differentiation, but this is *not* content-verified, so it's flagged rather than asserted).
 
 **Not yet moved into the vault** — currently in Google Drive (`Sem1/Calculus (Unzipped Files)/Calculus/`), not `Attachments/Legacy/` yet.
 
@@ -16,7 +16,7 @@ source: "Google Drive — Sem1/Calculus (Unzipped Files)/Calculus"
 | Lecture_Notes_(Chapter_1)_MAT1014_Calculus_Apr2024.pdf | Ch1: Limits and Continuity | #calculus, #limits, #continuity | unprocessed |
 | Tutorial_1_(Problem)_MAT1014_Calculus_April2024.pdf | Ch1 tutorial — Limits and Continuity | #calculus, #limits, #continuity | unprocessed |
 | 1 The Limit of a Function.pdf | Overlaps with Ch1 §1.1 (Limit of a Function) — likely a duplicate/partial capture of the Chapter 1 notes | #calculus, #limits | unprocessed — possible duplicate of Chapter 1 notes |
-| Lecture_Notes_(Chapter_2)_MAT1014_Calculus_Apr2024.pdf | Ch2 — topic unconfirmed (not read) | #calculus | **flagged — >10MB, not read** |
+| Lecture_Notes_(Chapter_2)_MAT1014_Calculus_Apr2024.pdf | Ch2: Differentiation — derivative as a function/limit definition, differentiation rules (constant/power/sum/difference), product & quotient rule, trig derivatives, chain rule, implicit differentiation, logarithmic derivatives, inverse trig derivatives, parametric equations, hyperbolic function derivatives | #calculus, #differentiation, #chain-rule, #implicit-differentiation | unprocessed |
 | Lecture_Notes_(Chapter_3)_MAT1014_Calculus_Apr2024.pdf | Ch3 — topic unconfirmed (not read) | #calculus | **flagged — >10MB, not read** |
 | Tutorial_3_(Problem)_MAT1014_Calculus_April2024.pdf | Ch3 tutorial — topic unconfirmed (download failed repeatedly, revisit) | #calculus | unprocessed — retry download |
 | Lecture_Notes_(Chapter_4)_MAT1014_Calculus_Apr2024.pdf | Ch4: Integrals | #calculus, #integration | unprocessed |
@@ -38,7 +38,8 @@ source: "Google Drive — Sem1/Calculus (Unzipped Files)/Calculus"
 ## Definition of done
 
 - [x] All 21 files listed
-- [x] 4 files flagged as oversized (Ch2, Ch3, Ch5 lecture notes; Tutorial 2 problems)
+- [x] Chapter 2 lecture notes re-uploaded directly and read in full on 2026-09-13 — no longer flagged
+- [ ] 3 files still flagged as oversized (Ch3, Ch5 lecture notes; Tutorial 2 problems)
 - [ ] Tutorial 3 needs a retry download (connector session errors, not a size issue)
 - [ ] Not yet moved into `Attachments/Legacy/Calculus/` in the actual Obsidian vault
 - [ ] Not yet atomized into `Study/` notes
