@@ -70,7 +70,7 @@ Also: **the original `.zip` files are still sitting in Drive alongside every unz
 - **Oversized (>10MB):**
   - `Workshop 5.pdf` — 14,218,722 bytes (~14.2MB)
   - `Extra.pdf` — 13,282,492 bytes (~13.3MB)
-  - `Workshop 3.pdf` — 11,834,019 bytes (~11.8MB)
+  - `Workshop 3.pdf` — 11,834,019 bytes (~11.8MB) — **resolved**, re-uploaded directly and read in full 2026-09-13: ASC2014 Life Contingencies I, Chapter 3 (Insurance Models) — expected present value of endowment/term/deferred insurance, special benefit-structure insurance.
   - `Workshop 4.pdf` — 10,484,633 bytes — **borderline**: just 1,127 bytes under the binary 10MiB mark (10,485,760), so it's right at the edge of the connector's cap either way. Flagging it as oversized to be safe.
 - **Ambiguous filename:** `16492916.pdf` — numeric-only name, content unknown from metadata. Same pattern as the ambiguous files Sem1 had to actually open to identify.
 - **Gap check:** Workshops 1–5, Tutorials 1–5, Chapters 1–5, Answers 1–5 all complete.
