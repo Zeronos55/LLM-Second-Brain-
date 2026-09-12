@@ -23,7 +23,7 @@ source: "Google Drive — Sem1/Calculus (Unzipped Files)/Calculus"
 | Tutorial_4_(Problem)_MAT1014_Calculus_April2024.pdf | Ch4 tutorial — Integrals (indefinite/definite integrals, substitution) | #calculus, #integration | unprocessed |
 | Lecture_Notes_(Chapter_5)_MAT1014_Calculus_Apr2024.pdf | Ch5 — topic unconfirmed (not read) | #calculus | **flagged — >10MB, not read** |
 | Tutorial_5_(Problem)_MAT1014_Calculus_April2024.pdf | Ch5 tutorial — Techniques of Integration and its Applications (integration by parts, partial fractions, trig integrals, improper integrals) | #calculus, #integration-techniques | unprocessed |
-| Tutorial_2_(Problem)_MAT1014_Calculus_April2024.pdf | Ch2 tutorial — topic unconfirmed | #calculus | **flagged — >10MB, not read** |
+| Tutorial_2_(Problem)_MAT1014_Calculus_April2024.pdf | Ch2 tutorial — Differentiation (definition of tangent/derivative, differentiability, differentiation rules, product/quotient rule, trig/log/exponential/hyperbolic/inverse-trig derivatives, implicit differentiation, parametric equations) | #calculus, #differentiation, #chain-rule, #implicit-differentiation | unprocessed |
 | Take Test MAT1014 Mock Quiz - April 2024 – 2408-MAT1014.pdf | Mock quiz — instructions/cover page | #calculus, #mock-exam | unprocessed |
 | Image.pdf | eLearn mock-quiz screenshots with worked solutions — limits questions | #calculus, #limits, #mock-exam | unprocessed |
 | ① g(e- k g(-y = 3 z.pdf | Mixed revision/practice worksheet — limits, chain rule differentiation, higher-order derivatives, trig identities | #calculus, #limits, #differentiation | unprocessed |
@@ -38,8 +38,8 @@ source: "Google Drive — Sem1/Calculus (Unzipped Files)/Calculus"
 ## Definition of done
 
 - [x] All 21 files listed
-- [x] Chapter 2 and Chapter 3 lecture notes re-uploaded directly and read in full on 2026-09-13 — no longer flagged
-- [ ] 2 files still flagged as oversized (Ch5 lecture notes; Tutorial 2 problems)
+- [x] Chapters 2, 3, 4 lecture notes and Tutorial 2 re-uploaded directly and read in full on 2026-09-13 — no longer flagged
+- [ ] 1 file still flagged as oversized (Ch5 lecture notes)
 - [ ] Tutorial 3 needs a retry download (connector session errors, not a size issue)
 - [ ] Not yet moved into `Attachments/Legacy/Calculus/` in the actual Obsidian vault
 - [ ] Not yet atomized into `Study/` notes
