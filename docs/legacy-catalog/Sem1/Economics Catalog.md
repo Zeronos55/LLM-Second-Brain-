@@ -56,7 +56,7 @@ source: "Google Drive — Sem1/Economics (Unzipped Files)/Economics"
 
 | File | Topics covered | Tags | Status |
 |---|---|---|---|
-| TS2.1 - Lecture 1.pdf | Lecture 1 — topic unconfirmed | #microeconomics | **flagged — >10MB, not read** |
+| TS2.1 - Lecture 1.pdf | Chapter 2: Demand, Consumer Behaviour, Supply, Market Equilibrium and Elasticity — law of demand, marginal utility (incl. diminishing marginal utility, ordinal utility/indifference curve approach), law of supply, market equilibrium and shifts in demand/supply | #microeconomics, #demand-supply, #consumer-theory, #market-equilibrium | unprocessed |
 | TS2.2_-_Lecture_2.pdf | Chapter 2.1: Elasticity | #microeconomics, #elasticity | unprocessed |
 | Section A Chapter 2.pdf | Handwritten answers — complement/substitute goods, demand shifts (Elasticity/Demand chapter) | #microeconomics, #elasticity, #demand-supply | unprocessed |
 | Question 8.pdf | Supply/demand curve application — price ceiling, tariffs | #microeconomics, #demand-supply | unprocessed |
@@ -64,6 +64,6 @@ source: "Google Drive — Sem1/Economics (Unzipped Files)/Economics"
 ## Definition of done
 
 - [x] All 35 files listed (27 top-level + 4 Macroeconomics + 4 Microeconomics)
-- [x] 1 file flagged as oversized (`TS2.1 - Lecture 1.pdf`, 11.08MB)
+- [x] The 1 previously-oversized file (`TS2.1 - Lecture 1.pdf`, 11.08MB) was re-uploaded directly and read in full on 2026-09-13 — content confirmed above, no longer flagged
 - [ ] Not yet moved into `Attachments/Legacy/Economics/` in the actual Obsidian vault
 - [ ] Not yet atomized into `Study/` notes — per the import plan, this happens on demand when the topic is being restudied
