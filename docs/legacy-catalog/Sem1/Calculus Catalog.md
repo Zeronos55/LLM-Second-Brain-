@@ -18,7 +18,7 @@ source: "Google Drive — Sem1/Calculus (Unzipped Files)/Calculus"
 | 1 The Limit of a Function.pdf | Overlaps with Ch1 §1.1 (Limit of a Function) — likely a duplicate/partial capture of the Chapter 1 notes | #calculus, #limits | unprocessed — possible duplicate of Chapter 1 notes |
 | Lecture_Notes_(Chapter_2)_MAT1014_Calculus_Apr2024.pdf | Ch2: Differentiation — derivative as a function/limit definition, differentiation rules (constant/power/sum/difference), product & quotient rule, trig derivatives, chain rule, implicit differentiation, logarithmic derivatives, inverse trig derivatives, parametric equations, hyperbolic function derivatives | #calculus, #differentiation, #chain-rule, #implicit-differentiation | unprocessed |
 | Lecture_Notes_(Chapter_3)_MAT1014_Calculus_Apr2024.pdf | Ch3: Application of Derivatives — tangent/normal lines, related rates, max/min values, increasing/decreasing test, concavity & inflection points, L'Hôpital's Rule, optimization problems, Newton's Method | #calculus, #applications-of-derivatives, #optimization, #related-rates | unprocessed |
-| Tutorial_3_(Problem)_MAT1014_Calculus_April2024.pdf | Ch3 tutorial — topic unconfirmed (download failed repeatedly, revisit) | #calculus | unprocessed — retry download |
+| Tutorial_3_(Problem)_MAT1014_Calculus_April2024.pdf | Ch3 tutorial — Application of Derivatives (tangent/normal lines, related rates, critical numbers, absolute/local max-min, concavity & inflection, L'Hôpital's Rule, optimization problems, Newton's Method) | #calculus, #applications-of-derivatives, #optimization, #related-rates | unprocessed |
 | Lecture_Notes_(Chapter_4)_MAT1014_Calculus_Apr2024.pdf | Ch4: Integrals — antiderivatives, indefinite integrals (incl. trig/exponential/reciprocal integrals, initial value problems), the definite integral and Riemann sum, the Fundamental Theorem of Calculus, average value of a function, the substitution rule | #calculus, #integration, #antiderivatives, #fundamental-theorem-of-calculus, #substitution-rule | unprocessed |
 | Tutorial_4_(Problem)_MAT1014_Calculus_April2024.pdf | Ch4 tutorial — Integrals (indefinite/definite integrals, substitution) | #calculus, #integration | unprocessed |
 | Lecture_Notes_(Chapter_5)_MAT1014_Calculus_Apr2024.pdf | Ch5 — topic unconfirmed (not read) | #calculus | **flagged — >10MB, not read** |
@@ -38,8 +38,7 @@ source: "Google Drive — Sem1/Calculus (Unzipped Files)/Calculus"
 ## Definition of done
 
 - [x] All 21 files listed
-- [x] Chapters 2, 3, 4 lecture notes and Tutorial 2 re-uploaded directly and read in full on 2026-09-13 — no longer flagged
+- [x] Chapters 2, 3, 4 lecture notes and Tutorials 2, 3 re-uploaded directly and read in full on 2026-09-13 — no longer flagged
 - [ ] 1 file still flagged as oversized (Ch5 lecture notes)
-- [ ] Tutorial 3 needs a retry download (connector session errors, not a size issue)
 - [ ] Not yet moved into `Attachments/Legacy/Calculus/` in the actual Obsidian vault
 - [ ] Not yet atomized into `Study/` notes
