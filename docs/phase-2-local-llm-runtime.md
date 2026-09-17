@@ -65,7 +65,15 @@ set OLLAMA_LLM_LIBRARY=cpu
 ollama serve
 ```
 
-Leave that window open, then in a **second** terminal run `ollama run phi4-mini` as normal — confirmed working: model loads (~15s) and responds with a 200, no crash. To make this permanent (so it survives a reboot without repeating the steps above), add both `CUDA_VISIBLE_DEVICES` (empty) and `OLLAMA_LLM_LIBRARY` (`cpu`) as system environment variables, then restart Ollama.
+Leave that window open, then in a **second** terminal run `ollama run phi4-mini` as normal — confirmed working: model loads (~15s) and responds with a 200, no crash.
+
+**Making it permanent:** Windows' system environment variable dialog won't save an empty value, so don't bother with `CUDA_VISIBLE_DEVICES` for the permanent setup — the actual fix is `OLLAMA_LLM_LIBRARY=cpu` alone (confirmed: this is what stopped the crash; the empty `CUDA_VISIBLE_DEVICES` on its own was not sufficient when tried by itself).
+
+1. Search Windows for **"Edit the system environment variables"** → Environment Variables
+2. Under **System variables**, click New: name `OLLAMA_LLM_LIBRARY`, value `cpu`
+3. OK out of both dialogs, then restart Ollama (quit it from the tray, or `taskkill /F /IM ollama.exe`, then reopen the app or let it relaunch)
+
+After that, the tray app starts in CPU-only mode automatically — no need to keep the manual two-terminal setup around.
 
 ## 3. Reality check (don't skip this)
 
