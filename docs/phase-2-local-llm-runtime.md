@@ -44,18 +44,28 @@ If `ollama run phi4-mini` fails with something like:
 CUDA error: the provided PTX was compiled with an unsupported toolchain
 ```
 
-this is a known Ollama/NVIDIA driver compatibility bug on Windows (not something you did wrong) — the CUDA toolchain bundled in Ollama's build doesn't match the installed GPU driver. Since this plan was already sized around CPU inference (`phi4-mini` was picked for ~15-20 tok/s on CPU, not GPU), the simplest fix is to skip GPU discovery entirely rather than chase a driver update:
+this is a known Ollama/NVIDIA driver compatibility bug on Windows (not something you did wrong) — the CUDA toolchain bundled in Ollama's build doesn't match the installed GPU driver (confirmed on this machine: an NVIDIA GeForce MX150, driver 12.7). Since this plan was already sized around CPU inference (`phi4-mini` was picked for ~15-20 tok/s on CPU, not GPU), the fix is to force Ollama onto its CPU runner rather than chase a driver update:
 
 ```
-:: Ollama runs as an auto-starting background service, so stop it first
+:: Ollama runs as an auto-starting background service, so stop it first —
+:: if taskkill says "not found," find what's actually holding the port instead:
+::   netstat -ano | findstr :11434
+::   taskkill /F /PID <pid from that output>
+:: also check the system tray for an Ollama icon and Quit it, since the tray
+:: app will otherwise auto-relaunch the server the moment you kill it.
 taskkill /F /IM ollama.exe
 
-:: Then start it fresh with GPU discovery disabled, in the same window
+:: Then start it fresh with GPU discovery disabled, in the same window.
+:: CUDA_VISIBLE_DEVICES="" alone was NOT sufficient on this setup (Ollama
+:: 0.34.0 still selected the CUDA device during discovery and crashed on
+:: load) - OLLAMA_LLM_LIBRARY=cpu is the one that actually worked, forcing
+:: the CPU runner directly instead of relying on GPU auto-detection:
 set CUDA_VISIBLE_DEVICES=
+set OLLAMA_LLM_LIBRARY=cpu
 ollama serve
 ```
 
-Leave that window open, then in a **second** terminal run `ollama run phi4-mini` as normal. To make this permanent (so it survives a reboot without repeating the steps above), add `CUDA_VISIBLE_DEVICES` as a system environment variable with an empty value, then restart Ollama.
+Leave that window open, then in a **second** terminal run `ollama run phi4-mini` as normal — confirmed working: model loads (~15s) and responds with a 200, no crash. To make this permanent (so it survives a reboot without repeating the steps above), add both `CUDA_VISIBLE_DEVICES` (empty) and `OLLAMA_LLM_LIBRARY` (`cpu`) as system environment variables, then restart Ollama.
 
 ## 3. Reality check (don't skip this)
 
