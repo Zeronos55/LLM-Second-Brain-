@@ -92,15 +92,21 @@ Watch for:
 
 **If it swap-thrashes, that's a legitimate outcome, not a failure.** Don't fight an 8GB machine — the fallback is to point Smart Connections/Copilot (Phases 3–4) at a cloud API (you already have Claude access) instead of Ollama for the chat model. The plugins themselves don't change, only the backend does; you lose the "fully local/private" property and nothing else breaks. `nomic-embed-text` is small enough that it's very unlikely to need this fallback — it's specifically `phi4-mini` (or any chat model) that's the risk.
 
+### Reality check result (2026-09-17): fallback to cloud API — decided
+
+Ran the reality check with Obsidian open. Result: CPU pegged at max, response took a long time, **and** the answer itself was low quality — it hallucinated badly on a straightforward prompt about the project (misdefined MCP as "Monitoring, Controlling, and Sensing," invented an unrelated "Microsoft Clarity" integration, and described training a model from scratch on AWS/GCP/Azure instead of the actual local RAG/vault-QA setup this plan describes). Slow-and-wrong is worse than just slow — this machine's combination of running CPU-only (after the CUDA workaround above) plus a genuinely weak chat model at this size isn't producing usable output.
+
+**Decision: chat model = cloud API (Claude), embedding model = local Ollama (`nomic-embed-text`).** Phases 3–4 (Smart Connections, Copilot for Obsidian) will be configured to call Claude for chat/vault-QA, not local `phi4-mini`. Embeddings stay local — `nomic-embed-text` is small enough (~275MB) that it wasn't implicated in the slowdown, and there's no reason to move it to a cloud API. Nothing about the plugins themselves changes, only their chat backend setting.
+
 ## 4. What not to install
 
 Skip anything larger than ~4B parameters at Q4 quantization on this machine. It is not worth the swap-thrashing to chase a marginally better model — `phi4-mini` was picked specifically to leave headroom, and going bigger defeats that.
 
 ## Definition of done for Phase 2
 
-- [ ] Ollama installed; `ollama --version` runs successfully in a terminal
-- [ ] `ollama list` shows both `phi4-mini` and `nomic-embed-text` pulled
-- [ ] Reality check performed: chatted with `phi4-mini` via `ollama run phi4-mini` while Obsidian (and normal study-session apps) were open
-- [ ] A decision made and noted: **local** (phi4-mini performed acceptably) or **fallback to cloud API** (it didn't, and Phase 3/4 will be configured to point at Claude instead) — either is a valid outcome, but Phase 3/4 setup depends on knowing which one you're doing
+- [x] Ollama installed; `ollama --version` runs successfully in a terminal
+- [x] `ollama list` shows both `phi4-mini` and `nomic-embed-text` pulled
+- [x] Reality check performed: chatted with `phi4-mini` via `ollama run phi4-mini` while Obsidian (and normal study-session apps) were open
+- [x] A decision made and noted: local didn't hold up (CPU maxed, slow, hallucinated output) — **Phases 3–4 will use a cloud API (Claude) for chat, and local `nomic-embed-text` for embeddings.** See "Reality check result" above.
 
 Only move to Phase 3 (Smart Connections) once this checklist is clean and you know which backend (local Ollama vs. cloud API) Phases 3–4 will actually point at.
