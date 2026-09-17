@@ -35,6 +35,28 @@ ollama list
 
 `ollama list` should show both models when done.
 
+### Troubleshooting: CUDA/GPU crash on `ollama run`
+
+If `ollama run phi4-mini` fails with something like:
+
+```
+500 Internal Server Error: llama-server process has terminated: exit status 0xc0000409 ...
+CUDA error: the provided PTX was compiled with an unsupported toolchain
+```
+
+this is a known Ollama/NVIDIA driver compatibility bug on Windows (not something you did wrong) — the CUDA toolchain bundled in Ollama's build doesn't match the installed GPU driver. Since this plan was already sized around CPU inference (`phi4-mini` was picked for ~15-20 tok/s on CPU, not GPU), the simplest fix is to skip GPU discovery entirely rather than chase a driver update:
+
+```
+:: Ollama runs as an auto-starting background service, so stop it first
+taskkill /F /IM ollama.exe
+
+:: Then start it fresh with GPU discovery disabled, in the same window
+set CUDA_VISIBLE_DEVICES=
+ollama serve
+```
+
+Leave that window open, then in a **second** terminal run `ollama run phi4-mini` as normal. To make this permanent (so it survives a reboot without repeating the steps above), add `CUDA_VISIBLE_DEVICES` as a system environment variable with an empty value, then restart Ollama.
+
 ## 3. Reality check (don't skip this)
 
 Numbers on paper don't tell you whether *your* machine can actually run this alongside a real study session. Test it directly:
