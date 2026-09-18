@@ -6,6 +6,8 @@ Parent plan: [Obsidian + Local LLM + MCP — Build Plan](obsidian-local-llm-mcp-
 
 **Depends on:** Phase 2 complete (Ollama installed, `nomic-embed-text` pulled — confirm with `ollama list`). Smart Connections does not need `phi4-mini` at all; embeddings-only, so the chat-model swap-thrashing problem from Phase 2 doesn't apply here.
 
+**If you uninstalled Ollama after Phase 2** (reasonable, if it wasn't clear at the time that embeddings were staying local): reinstalling just for `nomic-embed-text` is safe. The two models are not comparable in weight — `phi4-mini` is ~3.5GB resident and stays loaded generating tokens for the duration of a chat response (that's what maxed the CPU); `nomic-embed-text` is ~275MB, converts a note to a vector in a fraction of a second, and isn't running continuously in the background. `ollama pull nomic-embed-text` is all that's needed; no need to pull `phi4-mini` back, and no need to redo the `OLLAMA_LLM_LIBRARY=cpu` GPU workaround unless the same CUDA crash shows up again on this smaller model (unlikely, but the fix is identical if it does).
+
 ## 1. Install the plugin
 
 1. In Obsidian: **Settings → Community plugins** → make sure "Restricted mode" is off (Community plugins must be enabled).
