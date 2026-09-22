@@ -11,3 +11,4 @@ Planning docs:
     - [Sem2/Sem4/Sem5/Sem7 — Intake Audit](docs/legacy-catalog/Sem2-Sem7-Intake-Audit.md)
   - [Phase 2 — Local LLM Runtime (detailed)](docs/phase-2-local-llm-runtime.md)
   - [Phase 3 — Semantic Layer / Smart Connections (detailed)](docs/phase-3-smart-connections.md)
+  - [Phase 4 — Chat Layer / Copilot for Obsidian (detailed)](docs/phase-4-copilot-chat.md)
