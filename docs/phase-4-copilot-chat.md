@@ -27,26 +27,32 @@ Parent plan: [Obsidian + Local LLM + MCP — Build Plan](obsidian-local-llm-mcp-
 
 ## 3. Point the embedding model at local Ollama
 
-This is a **separate** setting from the chat model — Copilot uses an embedding model specifically for Vault QA's retrieval index, distinct from whatever generates the chat reply.
+**Correction (2026-09-22):** Copilot's settings got restructured (current tabs: Basic, BYOK, Miyo, Skills, Command, Self-Host, Advanced) — there's no "QA" tab anymore. The old "Vault QA" retrieval engine is now called **Miyo**, and the embedding model provider is added the same place the chat provider was, under **BYOK**, not a separate QA tab.
 
-1. **Settings → Copilot → QA** (embedding model section, wording may vary by version).
-2. Add/select an embedding provider — choose **OpenAI-compatible endpoint** (this is how Copilot reaches Ollama; Ollama exposes an OpenAI-compatible API, it isn't a distinct "Ollama" option in every version).
-3. Base URL: `http://localhost:11434/v1`
-4. Model name: `nomic-embed-text`
-5. API key field: leave blank, or put any placeholder string — Ollama doesn't check it, but some forms require the field to be non-empty.
-6. Save.
+This is still a **separate model slot** from the chat model — just configured in the same tab now.
+
+1. **Settings → Copilot → BYOK**.
+2. Look for a self-host template for **Ollama** (BYOK lists recommended providers/self-host templates including Ollama and LM Studio) — use that if present. If not, use **Add Custom Model**, enter the model name, and select **Ollama** as the provider.
+3. Model name: `nomic-embed-text`
+4. If it asks for a base URL explicitly rather than inferring it from the provider choice: `http://localhost:11434`
+5. Save — it should now show up in the model picker as an available embedding model.
+6. **Windows-specific gotcha:** Obsidian is an Electron app, and Ollama's server blocks cross-origin requests from it by default (CORS), which shows up as a silent connection failure or a CORS error in Copilot's console/logs. Fix: stop Ollama, set the `OLLAMA_ORIGINS` environment variable, then restart — same pattern as the `OLLAMA_LLM_LIBRARY` permanent fix from [Phase 2](phase-2-local-llm-runtime.md):
+   - Search Windows for **"Edit the system environment variables"** → Environment Variables → New (System variables): name `OLLAMA_ORIGINS`, value `app://obsidian.md*`
+   - OK out, then restart Ollama (quit from the tray, or `taskkill /F /IM ollama.exe`, then relaunch)
+   - Only chase this if you actually hit a CORS error — don't pre-apply it speculatively.
+7. In the **Miyo** tab, confirm **Semantic search** is toggled on — this is what actually uses the embedding model to build the retrieval index, separate from just having the model configured under BYOK.
 
 ## 4. Build the Vault QA index
 
-1. In the Copilot chat pane, switch mode to **Vault QA (Basic)**.
-2. This triggers indexing — every note gets embedded via the Ollama endpoint from step 3, same idea as Smart Connections' index in Phase 3, but this is Copilot's own separate index.
+1. In the Copilot chat pane, switch mode to **Vault QA**.
+2. This triggers indexing (via Miyo) — every note gets embedded via the Ollama model from step 3, same idea as Smart Connections' index in Phase 3, but this is Copilot's own separate index.
 3. Let it finish without interrupting. Watch Task Manager the first time, same as prior phases — `nomic-embed-text` is small, so this shouldn't be heavy, but confirm rather than assume, especially since this is a second embedding pass on top of Smart Connections' (they don't share an index).
 
 ## 5. Verify chat and Vault QA both work
 
 1. **Plain chat check:** ask Copilot's chat (not Vault QA mode) a simple question unrelated to your vault. Confirm the response is fast (cloud API, not local CPU) and actually correct — this is the exact failure mode Phase 2 hit with `phi4-mini` (slow *and* hallucinated), so it's worth explicitly noticing that neither problem shows up here on the free Gemini tier either.
-2. **Vault QA check:** switch to Vault QA (Basic) mode, and ask a question whose answer spans two or more notes (not something answerable from a single note — that would only test single-note recall, not retrieval across the index). Confirm the answer draws on the right notes and cites sources.
-3. If Vault QA gives an empty or generic answer, re-check step 3's base URL/model name first — the most common cause is the embedding endpoint silently failing and the index building on nothing.
+2. **Vault QA check:** switch to Vault QA mode, and ask a question whose answer spans two or more notes (not something answerable from a single note — that would only test single-note recall, not retrieval across the index). Confirm the answer draws on the right notes and cites sources.
+3. If Vault QA gives an empty or generic answer, re-check step 3's Ollama model setup first (including the CORS fix if you're on Windows and never applied it) — the most common cause is the embedding provider silently failing and the index building on nothing.
 
 ## 6. Try a custom prompt template (optional, worth doing)
 
@@ -59,7 +65,7 @@ Copilot supports saved custom prompts for recurring actions. Worth trying at lea
 
 - [ ] Free Gemini API key created (`aistudio.google.com/apikey`) and saved outside the vault (password manager, etc.)
 - [ ] Gemini added as the chat provider in Copilot BYOK settings, a Flash-tier model selected, set as default chat model
-- [ ] Embedding model set to local Ollama (`nomic-embed-text` via `http://localhost:11434/v1`) under Copilot's QA settings
+- [ ] Embedding model set to local Ollama (`nomic-embed-text`) under Copilot's BYOK settings, Semantic search enabled under the Miyo tab
 - [ ] Vault QA index built without errors
 - [ ] Verified: plain chat gives a fast, correct answer (no CPU-maxing, no hallucination — the two problems local `phi4-mini` had)
 - [ ] Verified: a Vault QA question spanning 2+ notes gets answered correctly with source citations
