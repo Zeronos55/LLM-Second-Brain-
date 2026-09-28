@@ -12,3 +12,4 @@ Planning docs:
   - [Phase 2 — Local LLM Runtime (detailed)](docs/phase-2-local-llm-runtime.md)
   - [Phase 3 — Semantic Layer / Smart Connections (detailed)](docs/phase-3-smart-connections.md)
   - [Phase 4 — Chat Layer / Copilot for Obsidian (detailed)](docs/phase-4-copilot-chat.md)
+  - [Phase 5 — MCP Bridge / Local REST API (detailed)](docs/phase-5-mcp-bridge.md)
