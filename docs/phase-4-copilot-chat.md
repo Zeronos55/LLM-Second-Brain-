@@ -2,7 +2,16 @@
 
 Parent plan: [Obsidian + Local LLM + MCP — Build Plan](obsidian-local-llm-mcp-plan.md)
 
-**Context for this phase:** Copilot for Obsidian is the chat sidebar and vault-QA layer — the closest thing to a "Recall" tab, but scoped to the whole vault. Two separate model slots need configuring, and per the decisions from [Phase 2](phase-2-local-llm-runtime.md#reality-check-result-2026-09-17-fallback-to-cloud-api--decided) and [Phase 3](phase-3-smart-connections.md), they point at different places:
+**Context for this phase:** Copilot for Obsidian is the chat sidebar and vault-QA layer — the closest thing to a "Recall" tab, but scoped to the whole vault.
+
+**Correction (2026-09-28), important structural point:** Copilot V4 splits chat into two separate surfaces, and this isn't obvious from the settings screen alone:
+
+- **Quick Chat** — a plain chat window, no vault access at all. Confirmed by testing: asking it a cross-note question gets a generic "I don't have context on that" answer, even with notes actually in the vault. It's chat-only, by design.
+- **Agent Chat** — the vault-aware surface, with tools to read/search notes. This is what "Vault QA" actually turned into in this version — there's no separate "Vault QA mode" toggle to switch into; vault access lives in Agent Chat instead.
+
+Agent Chat needs a backend, chosen from a "Select your agent" screen: **opencode**, **Claude** (needs an existing Claude Code CLI + Anthropic subscription), or **Codex** (needs an existing ChatGPT/ChatGPT subscription). Since the goal was free, **opencode** is the one that matters here — it supports your own provider key (BYOK), so it can run on the same free Gemini key used for Quick Chat, no separate subscription.
+
+Two separate model slots need configuring, and per the decisions from [Phase 2](phase-2-local-llm-runtime.md#reality-check-result-2026-09-17-fallback-to-cloud-api--decided) and [Phase 3](phase-3-smart-connections.md), they point at different places:
 
 - **Chat model → cloud API, free tier (Google Gemini).** The Phase 2 reality check showed this 8GB machine can't run a local chat model (`phi4-mini`) without maxing the CPU and producing hallucinated output, so chat needs a cloud model. **Decision (2026-09-22): use Google's Gemini API free tier rather than a paid Claude API key**, since you don't want to pay for API credits. Gemini's free tier requires no credit card and is a real cloud-scale model, so the same CPU-maxing/hallucination problem shouldn't recur. One tradeoff worth knowing: on the free tier, Google may use your prompts/vault content to improve their models — this is off by default on their paid tier. For actuarial study notes this is low-stakes, but worth knowing rather than assuming.
 - **Embedding model (for Vault QA's index) → local Ollama, `nomic-embed-text`.** Unlike Smart Connections (Phase 3), which gates custom embedding providers behind Pro, Copilot for Obsidian is free/open-source and supports pointing its embedding model at any OpenAI-compatible endpoint — which includes a local Ollama server, no paid tier required.
@@ -23,38 +32,30 @@ Parent plan: [Obsidian + Local LLM + MCP — Build Plan](obsidian-local-llm-mcp-
 3. Paste in the API key from step 1.
 4. Model ID: pick a current Flash-tier model (fast, and what the free tier is sized around) — check Copilot's model dropdown for the latest available Gemini Flash model name, since these version numbers change.
 5. **Test**, then **Save**. Keys are stored in Obsidian's local keychain on this device, not written into the vault itself — so they won't end up committed to git or synced anywhere unexpected.
-6. In Copilot's main chat settings, confirm the **default chat model** is now set to the Gemini model you just added — adding a provider doesn't always auto-select it as the active default.
+6. Under **Settings → Copilot → Basic → Quick Chat models**, confirm the Gemini model is toggled on and set as the **Default model**.
 
-## 3. Point the embedding model at local Ollama
+This covers Quick Chat only — a fast, simple chat window with no vault access (confirmed by testing: it can't answer questions about note content, even when the notes exist). For vault-aware chat/QA, continue to step 3 below.
 
-**Correction (2026-09-22):** Copilot's settings got restructured (current tabs: Basic, BYOK, Miyo, Skills, Command, Self-Host, Advanced) — there's no "QA" tab anymore. The old "Vault QA" retrieval engine is now called **Miyo**, and the embedding model provider is added the same place the chat provider was, under **BYOK**, not a separate QA tab.
+## 3. Set up Agent Chat (opencode + Gemini) for vault-aware QA
 
-This is still a **separate model slot** from the chat model — just configured in the same tab now.
+This is the part that replaces "build the Vault QA index" from the original plan — Agent Chat's tools search the vault directly rather than requiring a separate pre-built embedding index.
 
-1. **Settings → Copilot → BYOK**.
-2. Look for a self-host template for **Ollama** (BYOK lists recommended providers/self-host templates including Ollama and LM Studio) — use that if present. If not, use **Add Custom Model**, enter the model name, and select **Ollama** as the provider.
-3. Model name: `nomic-embed-text`
-4. If it asks for a base URL explicitly rather than inferring it from the provider choice: `http://localhost:11434`
-5. Save — it should now show up in the model picker as an available embedding model.
-6. **Windows-specific gotcha:** Obsidian is an Electron app, and Ollama's server blocks cross-origin requests from it by default (CORS), which shows up as a silent connection failure or a CORS error in Copilot's console/logs. Fix: stop Ollama, set the `OLLAMA_ORIGINS` environment variable, then restart — same pattern as the `OLLAMA_LLM_LIBRARY` permanent fix from [Phase 2](phase-2-local-llm-runtime.md):
-   - Search Windows for **"Edit the system environment variables"** → Environment Variables → New (System variables): name `OLLAMA_ORIGINS`, value `app://obsidian.md*`
-   - OK out, then restart Ollama (quit from the tray, or `taskkill /F /IM ollama.exe`, then relaunch)
-   - Only chase this if you actually hit a CORS error — don't pre-apply it speculatively.
-7. In the **Miyo** tab, confirm **Semantic search** is toggled on — this is what actually uses the embedding model to build the retrieval index, separate from just having the model configured under BYOK.
+1. Open **Agent Chat** (ribbon icon, or command palette → "Open Copilot Agent Chat Window"). If no default agent is set yet, you'll see a **"Select your agent"** screen.
+2. Select **opencode** (marked "Recommended" — supports any provider key, unlike Claude/Codex which need their own paid CLI subscriptions).
+3. Click **Configure** → **Managed by Copilot** (lets Copilot download/manage the opencode binary itself) → **Download & install**.
+   - **Known Windows issue:** this can fail with `EPERM: operation not permitted, rename ...` — a transient file lock from Windows Defender/an indexer scanning the freshly-downloaded binary during the install's rename step. Just retry (often succeeds on the 2nd attempt); if it keeps failing, temporarily add a Windows Security exclusion for the `~\.obsidian-copilot\opencode` folder, retry, then remove the exclusion.
+4. Once installed, configure opencode's model/provider: choose **your own provider key** (not "Copilot-hosted models") and point it at the same Gemini key added in step 2 — no need for a second key.
+5. Click **Done**.
 
-## 4. Build the Vault QA index
+Local Ollama (`nomic-embed-text`) never ended up needed for this phase — Agent Chat's vault tools work off opencode+Gemini directly, without a separate embedding-based index the way Smart Connections (Phase 3) works. Ollama stays installed for Phase 3's use, just not consumed here.
 
-1. In the Copilot chat pane, switch mode to **Vault QA**.
-2. This triggers indexing (via Miyo) — every note gets embedded via the Ollama model from step 3, same idea as Smart Connections' index in Phase 3, but this is Copilot's own separate index.
-3. Let it finish without interrupting. Watch Task Manager the first time, same as prior phases — `nomic-embed-text` is small, so this shouldn't be heavy, but confirm rather than assume, especially since this is a second embedding pass on top of Smart Connections' (they don't share an index).
+## 4. Verify Quick Chat and Agent Chat both work
 
-## 5. Verify chat and Vault QA both work
+1. **Quick Chat check:** ask a simple question unrelated to your vault. Confirm the response is fast (cloud API, not local CPU) and actually correct — this is the exact failure mode Phase 2 hit with `phi4-mini` (slow *and* hallucinated), so it's worth explicitly noticing neither problem shows up here on the free Gemini tier either.
+2. **Agent Chat check:** ask a question whose answer spans two or more notes (not something answerable from a single note — that tests single-note recall, not real retrieval). Confirmed working example from testing: asking it what's been written about stochastic/stationary processes correctly pulled from vault notes, where the same question in Quick Chat got a generic "I don't have that context" answer.
+3. If Agent Chat still doesn't reference vault content, re-check step 3 — most likely opencode wasn't actually pointed at the Gemini key (defaulted to a Copilot-hosted model instead), or the install didn't fully complete.
 
-1. **Plain chat check:** ask Copilot's chat (not Vault QA mode) a simple question unrelated to your vault. Confirm the response is fast (cloud API, not local CPU) and actually correct — this is the exact failure mode Phase 2 hit with `phi4-mini` (slow *and* hallucinated), so it's worth explicitly noticing that neither problem shows up here on the free Gemini tier either.
-2. **Vault QA check:** switch to Vault QA mode, and ask a question whose answer spans two or more notes (not something answerable from a single note — that would only test single-note recall, not retrieval across the index). Confirm the answer draws on the right notes and cites sources.
-3. If Vault QA gives an empty or generic answer, re-check step 3's Ollama model setup first (including the CORS fix if you're on Windows and never applied it) — the most common cause is the embedding provider silently failing and the index building on nothing.
-
-## 6. Try a custom prompt template (optional, worth doing)
+## 5. Try a custom prompt template (optional, worth doing)
 
 Copilot supports saved custom prompts for recurring actions. Worth trying at least one now to see the shape of it:
 
@@ -63,13 +64,12 @@ Copilot supports saved custom prompts for recurring actions. Worth trying at lea
 
 ## Definition of done for Phase 4
 
-- [ ] Free Gemini API key created (`aistudio.google.com/apikey`) and saved outside the vault (password manager, etc.)
-- [ ] Gemini added as the chat provider in Copilot BYOK settings, a Flash-tier model selected, set as default chat model
-- [ ] Embedding model set to local Ollama (`nomic-embed-text`) under Copilot's BYOK settings, Semantic search enabled under the Miyo tab
-- [ ] Vault QA index built without errors
-- [ ] Verified: plain chat gives a fast, correct answer (no CPU-maxing, no hallucination — the two problems local `phi4-mini` had)
-- [ ] Verified: a Vault QA question spanning 2+ notes gets answered correctly with source citations
+- [x] Free Gemini API key created (`aistudio.google.com/apikey`) and saved outside the vault
+- [x] Gemini added as the chat provider in Copilot BYOK settings, set as default Quick Chat model
+- [x] opencode installed and configured as the Agent Chat backend, pointed at the same free Gemini key (not a Copilot-hosted model)
+- [x] Verified: Quick Chat gives a fast, correct answer to a non-vault question (no CPU-maxing, no hallucination — the two problems local `phi4-mini` had)
+- [x] Verified: Agent Chat correctly answers a question spanning 2+ notes, where the same question in Quick Chat gets a generic "no context" answer — confirming vault access is real and scoped to Agent Chat specifically
 
-Only move to Phase 5 (MCP bridge) once this checklist is clean. At that point Phases 2–4 are all wired the way the plan settled on: free cloud Gemini for chat, local Ollama for embeddings, two separate plugin-managed indexes (Smart Connections' free bundled model, Copilot's Ollama-backed one) coexisting in the same vault.
+**Phase 4 complete (2026-09-28).** Chat is fully cloud-free-tier (Gemini) and fully free — no paid API credits, no paid Copilot license, no paid Claude/Codex CLI subscription. Local Ollama's `nomic-embed-text` ended up not needed for this phase specifically (Agent Chat's vault tools don't use a separate embedding index the way Smart Connections does), but stays installed for Phase 3.
 
-**Note:** MCP in Phase 5 connects Claude Code specifically (not Gemini) to read/write the vault directly — that's a separate integration from Copilot's in-app chat model, so this free-tier choice for Copilot doesn't affect or replace Phase 5's Claude Code connection.
+Move to Phase 5 (MCP bridge) next. That phase connects **Claude Code** (not Gemini, not opencode) to read/write the vault directly via the Local REST API plugin — a separate integration from anything configured here.
