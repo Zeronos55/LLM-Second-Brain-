@@ -8,6 +8,17 @@ Parent plan: [Obsidian + Local LLM + MCP — Build Plan](obsidian-local-llm-mcp-
 
 **Depends on:** nothing from Phases 2–4 — this only needs Obsidian itself and Claude Code installed on the same machine (Claude Code CLI, separate from the browser/web version of Claude).
 
+## Two things that are easy to conflate (read this first)
+
+If any of this plan (including this doc) was written or discussed with a cloud-based Claude Code session — one you reach through a browser, connected only to this GitHub repo — that session has **no access whatsoever** to your Windows machine, your actual Obsidian vault, Ollama, or anything local. It can only read/write files in this git repo and push them to GitHub. Nothing below in this doc can be done by that kind of session. It has to be done by a **separate, local** Claude Code session — opened by typing `claude` in a terminal (cmd, PowerShell, etc.) on your own computer.
+
+Second, once you have that local session, there are **two independent ways** it can touch your vault, and this doc is really about the second one:
+
+1. **Plain file access.** An Obsidian vault is just a folder of `.md` files on disk. If you open a terminal, `cd` into that folder, and run `claude` there, Claude Code can read and write those files directly with its normal built-in file tools — no plugin, no API, no setup at all. If Obsidian is open at the same time, it notices the file changes automatically. This alone is enough for "ask Claude Code to read/edit a note."
+2. **MCP via the Local REST API plugin** (what the rest of this doc sets up). Instead of touching files directly, Claude Code talks to a small web server that the Obsidian plugin runs, which exposes Obsidian-specific capabilities (its own search, tag listing, "what note is currently open," etc.) — genuinely more than plain file editing gives you, but more moving parts to set up (a plugin, an API key, a network connection). Unlike path 1, this does **not** require Claude Code's terminal to be `cd`'d into the vault folder at all — the connection is over the network (`127.0.0.1`), not through the filesystem, so the terminal can be anywhere.
+
+Both are legitimate; this doc sets up path 2 because it's the more capable long-term option, but if you just want something working immediately, path 1 needs nothing below this point — just `cd` into your vault and run `claude`.
+
 ## 1. Install the plugin
 
 1. In Obsidian: **Settings → Community plugins → Browse**, search **"Local REST API with MCP"** (by coddingtonbear — this is the actively maintained one that bundles the MCP server; there are older/other "Local REST API" plugins that don't).
@@ -35,20 +46,25 @@ The plugin serves over HTTPS by default, with a self-signed certificate it gener
 
 ## 4. Connect Claude Code
 
-Claude Code has native HTTP MCP support — no separate bridge process needed (that's only required for Claude Desktop, which this plan doesn't cover). In a terminal:
+Claude Code has native HTTP MCP support — no separate bridge process needed (that's only required for Claude Desktop, which this plan doesn't cover). **This command is run inside a local Claude Code session** (i.e. you've already typed `claude` in a terminal and are now chatting with it — not a raw `cmd.exe` prompt, and not this planning session):
 
 ```
-claude mcp add --transport http obsidian http://127.0.0.1:27123/mcp/ --header "Authorization: Bearer <your-api-key>"
+claude mcp add --transport http --scope user obsidian http://127.0.0.1:27123/mcp/ --header "Authorization: Bearer <your-api-key>"
 ```
 
 (swap in the HTTPS URL from Option A if you went that route instead, and the API key from step 2). This registers the server immediately — no restart needed.
 
+**About `--scope user`:** without it, the default scope ties this connection to whatever project folder you happen to be in when you run the command — meaning the obsidian tools would only show up in Claude Code sessions started from that exact folder later on. `--scope user` makes it available from *any* folder, any time you run `claude` on this machine, which is simpler to reason about while you're still learning the tool.
+
+**When copy-pasting this command**, double check the pasted text for stray characters right after `Bearer` — a leading `>` or similar can sneak in depending on how the command was displayed to you, and the server will silently reject the header if it's there.
+
 ## 5. Verify it works
 
-1. In a Claude Code session on this machine, ask it to read a note you know exists (by name or path).
-2. Ask it to create a new, clearly-labeled test note (e.g. "MCP Test Note") with some placeholder content.
-3. **Switch to Obsidian and confirm the new note actually appears** — this is the real test; Claude Code reporting success isn't enough on its own, since the point is verifying the write actually landed in the vault.
-4. Delete the test note once confirmed (either from Obsidian directly, or by asking Claude Code to delete it — that's also a useful check that deletes work too).
+1. **First, run `claude mcp list`** (a plain command, not `/mcp`) in that same local session, and confirm `obsidian` appears in the output. Note: the `/mcp` slash command's "Manage MCP servers" panel shows something different — connectors tied to your claude.ai account (Google Drive, Canva, etc.) — and won't necessarily list this one, so don't use it to check.
+2. In that same local Claude Code session, ask it (as a normal chat message, not a slash command) to read a note you know exists — e.g. "read my Stationary Process note." Being explicit that you mean the vault ("check my Obsidian vault for...") helps it pick the right tool instead of defaulting to searching whatever local folder it's running in.
+3. Ask it to create a new, clearly-labeled test note (e.g. "MCP Test Note") with some placeholder content.
+4. **Switch to Obsidian and confirm the new note actually appears** — this is the real test; Claude Code reporting success isn't enough on its own, since the point is verifying the write actually landed in the vault.
+5. Delete the test note once confirmed (either from Obsidian directly, or by asking Claude Code to delete it — that's also a useful check that deletes work too).
 
 ## 6. Security check (don't skip)
 
@@ -61,7 +77,8 @@ The plan's own security note is worth actually confirming, not just reading: thi
 
 - [ ] Local REST API with MCP plugin installed and enabled
 - [ ] API key retrieved and stored somewhere safe (not in the vault)
-- [ ] Endpoint chosen (plain HTTP on 27123, or HTTPS on 27124 with the cert trusted) and Claude Code connected via `claude mcp add --transport http`
+- [ ] Endpoint chosen (plain HTTP on 27123, or HTTPS on 27124 with the cert trusted) and Claude Code connected via `claude mcp add --transport http --scope user`, run inside a local Claude Code session (not this planning session, not a raw `cmd.exe` prompt)
+- [ ] Verified via `claude mcp list` (not the `/mcp` panel) that `obsidian` is actually registered
 - [ ] Verified: Claude Code can read an existing note's actual content
 - [ ] Verified: a note Claude Code creates actually appears in Obsidian (checked in Obsidian itself, not just taken on Claude Code's word)
 - [ ] Verified: the port is unreachable from another device on the same network
