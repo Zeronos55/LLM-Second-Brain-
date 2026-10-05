@@ -1,6 +1,6 @@
 ---
 name: update-subject
-description: Tops up a subject that was already atomized into the Obsidian vault — finishes the unprocessed, partial, skipped or referenced-only tutorials, workshops and graded assessment briefs, and independently re-computes the subject's existing notes (formulas, worked examples, tutorial answers), flagging source errata and unverifiable items. Append-only on existing notes. Invoke by name when the user wants an existing subject brought up to the current atomize-subject standard — e.g. "update MAT3034" or "run update-subject on ASC2024." Requires MOCs/Legacy/<Code> Catalog.md to already exist; for a subject not yet in the vault use atomize-subject instead.
+description: Tops up a subject that was already atomized into the Obsidian vault — finishes the unprocessed, partial, skipped or referenced-only tutorials, workshops and graded assessment briefs, independently re-computes the subject's existing notes (formulas, worked examples, tutorial answers), flagging source errata and unverifiable items, and solves any unsolved or missing examples inside existing notes. Append-only on existing notes. Invoke by name when the user wants an existing subject brought up to the current atomize-subject standard — e.g. "update MAT3034" or "run update-subject on ASC2024." Requires MOCs/Legacy/<Code> Catalog.md to already exist; for a subject not yet in the vault use atomize-subject instead.
 ---
 
 You bring one **already-atomized** subject up to the current `atomize-subject` standard without redoing it. Two jobs: (1) process the practice material that earlier runs skipped or only partly did, and (2) verify the existing notes by independent re-computation. You never regenerate what is already fine.
@@ -22,6 +22,7 @@ Same as atomize-subject: Google Drive (to read/download the not-yet-processed so
   - add a `status/source-erratum` and/or `status/unverified` tag to its frontmatter;
   - insert a `> [!warning] Source erratum — …` or `> [!question] Unverified — …` callout directly at the affected spot;
   - correct a wrong value *only* when confirmed by two independent derivations (or an inconsistency inside the source), and then only together with the erratum callout stating the source's original value;
+  - add a solved example to a note whose Example section is missing, unsolved or too thin (step 4's example audit): insert it as a new block directly *after* the existing Example section, or — if the note has no Example section — as a new `## Example` section immediately before `## Related`. The original text is left untouched;
   - append a link to a new worked-example/solutions note in its **Related** section;
   - normalize a non-conforming `created` date.
   Every callout has its tag and every tag has its callout. Reuse tags from `MOCs/Tags MOC.md`; never invent variants.
@@ -41,6 +42,12 @@ Same as atomize-subject: Google Drive (to read/download the not-yet-processed so
 
 4. **Verify the existing notes.** Build the checkable-items list over the subject's existing notes (those linked from the catalog's `atomized →` entries and the subject MOC): every formula/identity, numeric worked example, and tutorial answer. Read the matching source PDF from `Attachments/Legacy/<Code>/` (download from Drive only if the archive copy is missing). Then run atomize-subject step 5 in full: recompute from the inputs first, compare second; settle every mismatch as source erratum / rounding-only / unverified; apply the append-only edits above. Notes whose items all pass get no marker. Handwritten or OCR-unreadable content stays `status/unverified`. Newly written notes (step 3) are verified the same way before filing.
 
+   **Example audit — solve the examples in existing notes.** While verifying, check each existing note's Example section against atomize-subject's step 4 standard (question, step-by-step workings with intermediate results, stated final answer). For every note that fails it:
+   - *Example is a question only, an answer only, or skips most steps:* solve it yourself and add the full workings as a block right after the existing example, headed `> [!example] Worked solution — Solved by AI (source gave only the question/answer)`.
+   - *No Example section, or a generic/qualitative one where a computation is possible:* add a short self-contained example with concrete numbers, solved, headed `> [!example] Worked example — Illustrative`; for a purely qualitative concept add a concrete scenario applied step by step.
+   - *Example already fully worked:* leave it; it is covered by the verification above.
+   Solve first using the source PDF where it has the question, then confirm each added solution by a second independent route (atomize-subject step 5); if only one route exists, add `> [!question] Unverified — single-route solution` and the `status/unverified` tag. Never alter the original example's text to match your solution — if yours differs from a stated source answer, that is a mismatch to settle as erratum/unverified, not something to silently overwrite.
+
 5. **Archive the newly processed sources** into `Attachments/Legacy/<Code>/` per atomize-subject step 9 (naming convention, base64-from-tool-result-file decoding, byte-size check against Drive's `fileSize`). Don't re-download files already archived.
 
 6. **Update bookkeeping in place — never rewrite whole files:**
@@ -56,7 +63,8 @@ Same as atomize-subject: Google Drive (to read/download the not-yet-processed so
 Because existing notes were edited, the report is the user's audit trail. Always end with:
 
 - **Work list outcome:** each file processed, with the notes it produced (tutorial/workshop/assignment solution notes separate from concept notes)
-- **Existing notes edited:** every note touched, and exactly what was appended or changed (tag, callout location, Related link, corrected value, date normalization) — so the append-only guarantee can be checked
+- **Existing notes edited:** every note touched, and exactly what was appended or changed (tag, callout location, Related link, corrected value, date normalization, added solved example) — so the append-only guarantee can be checked
+- **Example audit:** how many existing notes had fully worked examples already, how many got a solved or illustrative example added (list them), and how many of those remain single-route/unverified
 - Every tag used, split into "reused existing" vs "genuinely new"
 - Every file skipped, still unprocessed, or left `referenced only`, and why (including anything needing manual download)
 - **Verification results:** counts of formulas, worked examples and tutorial/assignment questions recomputed and matched; every **source erratum** (note, location, source value vs recomputed value); rounding-only differences; every item left **unverified** with the reason. List notes carrying `#status/source-erratum` and `#status/unverified` separately. Be explicit about questions you solved because no source solution existed.

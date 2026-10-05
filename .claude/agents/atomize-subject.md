@@ -29,6 +29,12 @@ You convert one subject's raw course material (Google Drive PDFs — lecture not
    - Title Case filename, no IDs/dates, descriptive enough to stand alone as a link (Phase 1 §4).
    - Frontmatter: `tags`, `created` (today's date, `DD/MM/YYYY`), `summary` (one sentence, <160 chars), `source` citing the originating Drive file (Phase 1 §2, and the `source` convention from the import doc). Do not invent extra frontmatter fields — verification results go in the note body (step 5), not the schema.
    - Body follows the Atomic Card template: Definition/Statement, Intuition, Example, Related.
+   - **Every Example section is a fully worked, solved example** — question, step-by-step workings with each intermediate result shown, and a clearly stated final answer; never just a restated problem or a bare answer. Cases:
+     - *Source worked example, complete:* reproduce it, filling in any steps the slides skipped so a student can follow every line.
+     - *Source gives only the question, only the final answer, or skips most of the steps:* solve it yourself and show the full workings; mark it *(Solved by AI — source gave only the question/answer)*.
+     - *Source has no example for the concept:* write a short self-contained *(Illustrative)* example with concrete numbers and solve it.
+     - *Purely qualitative concept (nothing computable):* give a concrete, specific scenario that applies the concept and walk through how it applies — not a generic restatement of the definition.
+     - Every solved example goes through step 5 like any other checkable item; never include one whose numbers you haven't computed.
    - **Before adding any tag**, check `MOCs/Tags MOC.md` for an existing close synonym and reuse it instead of inventing a new one (Phase 1 §3 — this is the rule that prevents tag drift, don't skip it).
 
    **Tutorials and workshops.** Every tutorial, workshop, practice-question and problem-set file in the folder is atomized, using the existing vault pattern (see `Credibility Tutorial 6 Worked Solutions` and the `Worked Example - …` notes under `Study/Simulation and Credibility Theory/`):
@@ -46,7 +52,7 @@ You convert one subject's raw course material (Google Drive PDFs — lecture not
      - *Formulas* — re-derive or sanity-check each one: dimensional/units consistency, limiting and special cases (e.g. a probability stays in [0, 1], a credibility factor between 0 and 1, a pure case collapses to the textbook result), and agreement with the standard form in any archived reference textbook or table from the same folder.
      - *Numeric worked examples* — recompute every table cell, running total, factor and final figure.
      - *Tutorial/workshop answers and workings* — as above.
-     - *Examples you write yourself* (e.g. an *(Illustrative)* example added because the source had none) — compute these too; an invented example with unchecked numbers is worse than none.
+     - *Examples you solve or write yourself* (every *(Illustrative)* example and every *(Solved by AI)* example from step 4) — these have no source answer to compare against, so apply the second-route check below; an example with unchecked numbers is worse than none.
    - **Settle every mismatch before moving on.** Re-run your own computation and re-read the source line first (rounding convention? a transcription slip of yours?). Then:
      - **Source is wrong** (confirmed by two independent derivations or an inconsistency inside the source itself): write the *corrected* value in the note and add an inline callout directly at that spot — `> [!warning] Source erratum — slide shows X; recomputed Y because …` — so the discrepancy is visible and traceable. Never silently overwrite, and never silently keep the wrong number. **Add the tag `status/source-erratum`** to that note's `tags`.
      - **Difference is only rounding/convention:** keep the source's figure, state the convention used, and note the unrounded value. No tag — this isn't a mismatch.
