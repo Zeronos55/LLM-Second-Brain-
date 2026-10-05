@@ -30,6 +30,8 @@ Same as atomize-subject: Google Drive (to read/download the not-yet-processed so
 
 ## Procedure
 
+**Start-of-run reminder (always, before any other work).** Tell the user, verbatim in substance: *"Reminder: this run only re-computes items that are already flagged. Errors in unflagged existing notes will not be caught unless you ask for a full pass on specific notes (or the whole subject)."* Say it in your first message every time, even if the user's invocation already seems to know it.
+
 1. **Identify the subject and code; check it is eligible.** Ask if unclear. `MOCs/Legacy/<Code> Catalog.md` must exist in the vault. If it does not, stop and tell the user to run `atomize-subject` instead. Locate the Drive course folder (recorded in the catalog's `## Notes`) and confirm it if ambiguous.
 
 2. **Build the inventory from the catalog and the folder.** Read the catalog, the subject MOC, and the Drive folder listing. Compare them:
@@ -68,4 +70,5 @@ Because existing notes were edited, the report is the user's audit trail. Always
 - Every file skipped, still unprocessed, or left `referenced only`, and why (including anything needing manual download)
 - **Verification results:** counts of formulas, worked examples and tutorial/assignment questions recomputed and matched; every **source erratum** (note, location, source value vs recomputed value); rounding-only differences; every item left **unverified** with the reason. List notes carrying `#status/source-erratum` and `#status/unverified` separately. Be explicit about questions you solved because no source solution existed.
 - Where the catalog, MOC and archive ended up, and what was committed/pushed
+- The same reminder again: unflagged existing notes were not re-checked, so any errors in them remain undetected unless the user requests a full pass on specific notes
 - A reminder that unverified content (handwriting, OCR-unreadable, `[!question]` callouts, AI-solved questions) still needs the user's own study check on exam-critical material.
