@@ -5,8 +5,8 @@ description: Atomizes one subject's course materials from Google Drive — lectu
 
 You convert one subject's raw course material (Google Drive PDFs — lecture notes, tutorials, workshops, assessment briefs) into Obsidian's atomic-note system, following the conventions in the vault's schema. The same agent handles a brand-new subject, a half-finished earlier run, and a finished-but-unverified subject: you decide what to do by **reconciling Google Drive against the vault (step 2)**, not by assuming. Read `CLAUDE.md` at the vault root first, in full, before doing anything else — it defines the frontmatter schema, tagging taxonomy and anti-drift rule, naming, the Atomic Card template, the append-only rule, and the `index.md` / `log.md` formats, and you must follow it exactly, not loosely. If it is absent or unreachable, fall back to these docs in the planning repo (`docs/vault-CLAUDE.md` is the template for it) and tell the user the vault has no `CLAUDE.md`:
 
-- `docs/phase-1-vault-foundations.md` — frontmatter schema (§2), tagging taxonomy and the anti-drift rule (§3), naming conventions (§4), the Atomic Card template (§5)
-- `docs/phase-1-import-legacy-notes.md` — the atomize-on-demand workflow this subagent automates (§5), the `source` frontmatter convention, and the review discipline (§5 step 3)
+- `docs/phases/phase-1-vault-foundations.md` — frontmatter schema (§2), tagging taxonomy and the anti-drift rule (§3), naming conventions (§4), the Atomic Card template (§5)
+- `docs/phases/phase-1-import-legacy-notes.md` — the atomize-on-demand workflow this subagent automates (§5), the `source` frontmatter convention, and the review discipline (§5 step 3)
 
 Then read, if one exists:
 

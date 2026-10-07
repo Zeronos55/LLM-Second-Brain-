@@ -1,6 +1,6 @@
 # Phase 2 — Local LLM Runtime (Ollama)
 
-Parent plan: [Obsidian + Local LLM + MCP — Build Plan](obsidian-local-llm-mcp-plan.md)
+Parent plan: [Obsidian + Local LLM + MCP — Build Plan](../obsidian-local-llm-mcp-plan.md)
 
 **Context for this phase:** entirely local — nothing in this phase can run from a cloud session, it happens directly on your machine. Ollama isn't a feature by itself; it's the model backend that Smart Connections (Phase 3) and Copilot for Obsidian (Phase 4) will call for embeddings and chat. This phase's only job is getting it installed, getting two right-sized models pulled, and proving your 8GB machine can actually run one without becoming unusable.
 

@@ -1,6 +1,6 @@
 # Phase 5 — MCP Bridge (Local REST API plugin)
 
-Parent plan: [Obsidian + Local LLM + MCP — Build Plan](obsidian-local-llm-mcp-plan.md)
+Parent plan: [Obsidian + Local LLM + MCP — Build Plan](../obsidian-local-llm-mcp-plan.md)
 
 **Context for this phase:** this is the part that actually improves on the current React-app workflow (copy-pasting markdown by hand). It's a single Obsidian plugin — **Local REST API with MCP** by coddingtonbear — that bundles both a REST API and an MCP server running inside Obsidian. Once connected, Claude Code can read, search, and write notes in your vault directly, rather than you pasting content back and forth.
 
@@ -83,4 +83,4 @@ The plan's own security note is worth actually confirming, not just reading: thi
 - [ ] Verified: a note Claude Code creates actually appears in Obsidian (checked in Obsidian itself, not just taken on Claude Code's word)
 - [ ] Verified: the port is unreachable from another device on the same network
 
-Once this is clean, Phases 1–5 of the original plan are all complete: a structured vault (Phase 1), local embeddings backup path via Ollama (Phase 2, though ended up mostly unused directly — see Phase 3/4 notes), Smart Connections' free semantic layer (Phase 3), free cloud chat + vault-aware Agent Chat via Copilot (Phase 4), and now Claude Code with direct vault access (Phase 5). [Phase 6](obsidian-local-llm-mcp-plan.md#phase-6--where-to-improve-on-what-the-articles-showed) in the parent plan covers where to take this further (closing the loop with the React app, template-driven study workflows, a tagging-taxonomy MOC, formula handling) — worth revisiting once this phase is settled and lived-in for a bit, rather than rushing straight into it.
+Once this is clean, Phases 1–5 of the original plan are all complete: a structured vault (Phase 1), local embeddings backup path via Ollama (Phase 2, though ended up mostly unused directly — see Phase 3/4 notes), Smart Connections' free semantic layer (Phase 3), free cloud chat + vault-aware Agent Chat via Copilot (Phase 4), and now Claude Code with direct vault access (Phase 5). [Phase 6](../obsidian-local-llm-mcp-plan.md#phase-6--where-to-improve-on-what-the-articles-showed) in the parent plan covers where to take this further (closing the loop with the React app, template-driven study workflows, a tagging-taxonomy MOC, formula handling) — worth revisiting once this phase is settled and lived-in for a bit, rather than rushing straight into it.
