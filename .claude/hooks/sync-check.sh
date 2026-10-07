@@ -13,6 +13,9 @@ fi
 
 for ref in origin/main $(git for-each-ref --format='%(refname:short)' 'refs/remotes/origin/claude/*' 'refs/remotes/origin/local/*'); do
   [ "$ref" = "origin/$branch" ] && continue
+  # only branches with recent activity (last 2 days); skip stale ones
+  ts=$(git log -1 --format=%ct "$ref" 2>/dev/null) || continue
+  [ $(( $(date +%s) - ts )) -gt 172800 ] && continue
   n=$(git rev-list --count "HEAD..$ref" 2>/dev/null) || continue
   if [ "$n" -gt 0 ]; then
     out+="- $ref has $n commit(s) not in HEAD:"$'\n'

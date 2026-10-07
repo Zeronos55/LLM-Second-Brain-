@@ -22,6 +22,6 @@ fi
 [ "$(cat "$statefile" 2>/dev/null)" = "$state" ] && exit 0   # already reminded for this state
 echo "$state" > "$statefile"
 
-msg="Unpushed work on $branch: $unpushed unpushed commit(s), $dirty uncommitted file(s). Ask Claude to \"commit and push\" before switching sides."
+msg="Unpushed work on $branch: $unpushed unpushed commit(s), $dirty uncommitted file(s). Ask Claude to commit and push before switching sides."
 printf '{"systemMessage": "%s"}\n' "$msg"
 exit 0
