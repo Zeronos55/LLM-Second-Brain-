@@ -2,7 +2,7 @@
 
 > **How to use this file:** copy everything below the line into `CLAUDE.md` at the **root of your Obsidian vault**. Claude Code loads it automatically when launched from inside the vault (`cd` into the vault, run `claude`). A session connected only through the Local REST API / MCP bridge does *not* auto-load it — tell that session to read `CLAUDE.md` at the vault root first.
 >
-> This repo copy is the source of truth for the template. When Phase 1 conventions change, update this file and re-copy it. Rationale for each rule lives in [Phase 1 — Vault Foundations](phase-1-vault-foundations.md) and [Importing Legacy Annotated Notes](phase-1-import-legacy-notes.md); the vault copy is deliberately self-contained and does not depend on them.
+> This repo copy is the source of truth for the template. When Phase 1 conventions change, update this file and re-copy it. Rationale for each rule lives in [Phase 1 — Vault Foundations](phases/phase-1-vault-foundations.md) and [Importing Legacy Annotated Notes](phases/phase-1-import-legacy-notes.md); the vault copy is deliberately self-contained and does not depend on them.
 
 ---
 

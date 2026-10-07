@@ -1,6 +1,6 @@
 # Phase 1 — Vault Foundations (detailed plan)
 
-Parent plan: [Obsidian + Local LLM + MCP — Build Plan](obsidian-local-llm-mcp-plan.md)
+Parent plan: [Obsidian + Local LLM + MCP — Build Plan](../obsidian-local-llm-mcp-plan.md)
 
 **Context for this phase:** the vault itself is starting fresh, but there's a backlog of annotated notes/tutorials/workshops from previous semesters (iPad, GoodNotes) to bring in — see [Importing Legacy Annotated Notes](phase-1-import-legacy-notes.md) for that pipeline; it lands under `Attachments/Legacy/` and `MOCs/Legacy/`, separate from the structure below until individual notes are atomized into it. Taxonomy here is designed as a general study vault that's actuarial-heavy in practice — the folder/tag structure is topic-based, not tied to SOA/CAS exam codes, so it holds up if the subject mix shifts later.
 

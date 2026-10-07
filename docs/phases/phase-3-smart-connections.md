@@ -1,6 +1,6 @@
 # Phase 3 — Semantic Layer (Smart Connections)
 
-Parent plan: [Obsidian + Local LLM + MCP — Build Plan](obsidian-local-llm-mcp-plan.md)
+Parent plan: [Obsidian + Local LLM + MCP — Build Plan](../obsidian-local-llm-mcp-plan.md)
 
 **Context for this phase:** entirely local, entirely inside Obsidian — Smart Connections is a community plugin that builds a vault-wide embedding index and surfaces semantically related notes as you write, plus semantic (not keyword) search. It needs a model to turn note text into embedding vectors.
 

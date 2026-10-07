@@ -44,7 +44,7 @@ This second path is what genuinely improves on your current React-app workflow: 
 
 ## Phase 1 — Vault foundations (no new tools yet)
 
-> Detailed plan: [Phase 1 — Vault Foundations](phase-1-vault-foundations.md)
+> Detailed plan: [Phase 1 — Vault Foundations](phases/phase-1-vault-foundations.md)
 
 Before installing anything, make the vault worth indexing:
 

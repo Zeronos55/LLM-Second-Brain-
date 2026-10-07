@@ -1,6 +1,6 @@
 # Importing Legacy Annotated Notes (Option A: archive now, atomize on demand)
 
-Parent plan: [Obsidian + Local LLM + MCP — Build Plan](obsidian-local-llm-mcp-plan.md)
+Parent plan: [Obsidian + Local LLM + MCP — Build Plan](../obsidian-local-llm-mcp-plan.md)
 Builds on: [Phase 1 — Vault Foundations](phase-1-vault-foundations.md)
 
 **Scope:** previous-semester notes, tutorials, and workshop material annotated on iPad in **GoodNotes**. GoodNotes has no separate "annotation layer" on export — a notebook exports as a single flattened PDF with the handwriting baked into the page images. That constraint drives everything below: these PDFs are opaque to Smart Connections' embedding index (Phase 3) until content is pulled out of them into markdown, so the plan is archive first, atomize only when a topic is actually being restudied.

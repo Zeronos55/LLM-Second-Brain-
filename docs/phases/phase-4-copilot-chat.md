@@ -1,6 +1,6 @@
 # Phase 4 — Chat Layer (Copilot for Obsidian)
 
-Parent plan: [Obsidian + Local LLM + MCP — Build Plan](obsidian-local-llm-mcp-plan.md)
+Parent plan: [Obsidian + Local LLM + MCP — Build Plan](../obsidian-local-llm-mcp-plan.md)
 
 **Context for this phase:** Copilot for Obsidian is the chat sidebar and vault-QA layer — the closest thing to a "Recall" tab, but scoped to the whole vault.
 
