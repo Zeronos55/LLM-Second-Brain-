@@ -6,4 +6,4 @@ This repo holds **planning docs and subagent definitions** for an Obsidian + loc
 - `docs/vault-CLAUDE.md` is the **template for the vault's own `CLAUDE.md`** (plus `vault-index-template.md` and `vault-log-template.md`). When a Phase 1 convention changes (frontmatter, tags, naming, workflows), update the template in the same change and tell the user to re-copy it into the vault.
 - `.claude/agents/` holds `atomize-subject`, `update-subject`, `ingest-source`, `refile-inbox` and `lint-vault`. They run against the vault, follow the vault `CLAUDE.md`, and fall back to the Phase 1 docs here only if it is unreachable. Don't restate vault conventions inside agent files — point to `CLAUDE.md`.
 - Dates in `created` fields and `log.md` entries are `DD/MM/YYYY`.
-- Don't commit or push unless asked (the `update-subject` agent's own pre-authorised push excepted).
+- Always ask the user before committing or pushing — never commit or push on your own.

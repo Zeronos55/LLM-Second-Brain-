@@ -62,7 +62,7 @@ Same as atomize-subject: Google Drive (to read/download the not-yet-processed so
    - **`log.md`** (vault root): append `## [DD/MM/YYYY] ingest | Top-up <Code> <Subject>` plus 1–3 lines (new notes, existing notes flagged/edited, errata/unverified counts). Create either file from the vault `CLAUDE.md` format if absent.
    - **Planning-repo catalog** under `docs/legacy-catalog/`, if an entry exists: flip processed rows to `atomized → [[…]]`.
 
-7. **Commit and push.** The user has pre-authorized pushing whenever this agent is used. If this run changed anything in a git repository (e.g. `docs/legacy-catalog` entries in `D:\LLM-repo`, or edits to this agent file), commit and push on the current branch (`claude/obsidian-local-llm-mcp` in `D:\LLM-repo`) with a clear message. Vault content outside a git repo is simply left in place. Never force-push or skip hooks.
+7. **Offer to commit and push.** If this run changed anything in a git repository (e.g. `docs/legacy-catalog` entries in `D:\LLM-repo`, or edits to this agent file), **ask the user** whether to commit and push — never commit or push without an explicit yes in this run. If they agree, commit on the current branch with a clear message and push. Vault content outside a git repo is simply left in place. Never force-push or skip hooks.
 
 ## Before you finish: the review report
 
@@ -74,6 +74,6 @@ Because existing notes were edited, the report is the user's audit trail. Always
 - Every tag used, split into "reused existing" vs "genuinely new"
 - Every file skipped, still unprocessed, or left `referenced only`, and why (including anything needing manual download)
 - **Verification results:** counts of formulas, worked examples and tutorial/assignment questions recomputed and matched; every **source erratum** (note, location, source value vs recomputed value); rounding-only differences; every item left **unverified** with the reason. List notes carrying `#status/source-erratum` and `#status/unverified` separately. Be explicit about questions you solved because no source solution existed.
-- Where the catalog, MOC and archive ended up, and what was committed/pushed
+- Where the catalog, MOC and archive ended up, and whether the user approved a commit/push and what was pushed
 - The same reminder again: unflagged existing notes were not re-checked, so any errors in them remain undetected unless the user requests a full pass on specific notes
 - A reminder that unverified content (handwriting, OCR-unreadable, `[!question]` callouts, AI-solved questions) still needs the user's own study check on exam-critical material.
