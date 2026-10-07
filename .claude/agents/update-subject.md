@@ -5,10 +5,13 @@ description: Tops up a subject that was already atomized into the Obsidian vault
 
 You bring one **already-atomized** subject up to the current `atomize-subject` standard without redoing it. Two jobs: (1) process the practice material that earlier runs skipped or only partly did, and (2) re-compute **only the items that are flagged** in the existing notes. You never regenerate or re-check what is not flagged — keep usage and runtime low.
 
-The rules for atomizing, tutorial/workshop notes, graded-assessment solutions and verification are defined in `.claude/agents/atomize-subject.md`. **Read that file in full first** (its steps 3, 4 including "Tutorials and workshops", 5, 8, 9, 10 and its review report) and follow those rules exactly for the work you do here. This file only defines what differs. Then read, in full:
+The rules for atomizing, tutorial/workshop notes, graded-assessment solutions and verification are defined in `.claude/agents/atomize-subject.md`. **Read that file in full first** (its steps 3, 4 including "Tutorials and workshops", 5, 8, 9, 10 and its review report) and follow those rules exactly for the work you do here. This file only defines what differs. Then read `CLAUDE.md` at the vault root in full — frontmatter schema, tagging taxonomy and anti-drift rule, naming, Atomic Card template, and the `index.md` / `log.md` formats. If it is absent or unreachable, fall back to these planning-repo docs and tell the user the vault has no `CLAUDE.md`:
 
 - `docs/phase-1-vault-foundations.md` — frontmatter schema (§2), tagging taxonomy and anti-drift rule (§3), naming (§4), Atomic Card template (§5)
 - `docs/phase-1-import-legacy-notes.md` — `source` convention and review discipline
+
+Also read, if one exists:
+
 - The matching `docs/legacy-catalog/**/*.md` entry (or `Sem2-Sem7-Intake-Audit.md`), if any
 
 ## What you need access to
@@ -55,6 +58,8 @@ Same as atomize-subject: Google Drive (to read/download the not-yet-processed so
    - **Catalog** `MOCs/Legacy/<Code> Catalog.md`: update the Status (and `File` link) of each processed row; append rows for files that were missing; update `## Notes` — add a dated "Top-up" paragraph with the verification tally split into *new notes* vs *existing notes verified*, every erratum (with its note), notes tagged `status/source-erratum` / `status/unverified` by name, and the unverified caveat. Keep format identical to the existing catalog.
    - **Subject MOC** `MOCs/<Subject> MOC.md`: add the new notes under **Tutorials and Workshops** (create that section if absent).
    - **Tags MOC** `MOCs/Tags MOC.md`: add genuinely new tags only.
+   - **`index.md`** (vault root): add one line per new note under the subject's section (`- [[Note Title]] — <summary>`); append-only, never reshuffle existing lines.
+   - **`log.md`** (vault root): append `## [DD/MM/YYYY] ingest | Top-up <Code> <Subject>` plus 1–3 lines (new notes, existing notes flagged/edited, errata/unverified counts). Create either file from the vault `CLAUDE.md` format if absent.
    - **Planning-repo catalog** under `docs/legacy-catalog/`, if an entry exists: flip processed rows to `atomized → [[…]]`.
 
 7. **Commit and push.** The user has pre-authorized pushing whenever this agent is used. If this run changed anything in a git repository (e.g. `docs/legacy-catalog` entries in `D:\LLM-repo`, or edits to this agent file), commit and push on the current branch (`claude/obsidian-local-llm-mcp` in `D:\LLM-repo`) with a clear message. Vault content outside a git repo is simply left in place. Never force-push or skip hooks.

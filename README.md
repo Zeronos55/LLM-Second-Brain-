@@ -13,3 +13,7 @@ Planning docs:
   - [Phase 3 — Semantic Layer / Smart Connections (detailed)](docs/phase-3-smart-connections.md)
   - [Phase 4 — Chat Layer / Copilot for Obsidian (detailed)](docs/phase-4-copilot-chat.md)
   - [Phase 5 — MCP Bridge / Local REST API (detailed)](docs/phase-5-mcp-bridge.md)
+  - Vault schema templates (copy into the vault root)
+    - [Vault `CLAUDE.md`](docs/vault-CLAUDE.md)
+    - [`index.md` seed](docs/vault-index-template.md)
+    - [`log.md` seed](docs/vault-log-template.md)
