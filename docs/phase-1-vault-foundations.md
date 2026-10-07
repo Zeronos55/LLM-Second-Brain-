@@ -65,6 +65,8 @@ Two tag namespaces, both flat kebab-case, no exam-code prefixes:
 - **Type/status tags** — a small, fixed, nested set, applied in addition to topic tags:
   - `#type/definition`, `#type/theorem`, `#type/formula`, `#type/example`
   - `#status/review-needed`, `#status/mastered`
+  - `#status/unverified` — the note holds a value or formula that could not be independently confirmed (ambiguous, missing inputs, unreadable scan)
+  - `#status/source-erratum` — the note corrects a mistake in the source material; the correction is called out inline
 
 **The rule that prevents drift:** before adding a new topic tag, check `MOCs/Tags MOC.md` first. If a close synonym already exists (`#markov-process` vs `#markov-chain`), reuse the existing one. If it's genuinely new, add it to the Tags MOC when you add it to a note. This is the single habit that keeps re-embedding (Phase 3) from being invalidated by tag churn — re-tagging after the index exists means re-indexing, per the parent plan.
 
