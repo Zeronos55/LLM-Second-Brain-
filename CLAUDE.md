@@ -17,6 +17,12 @@ Neither session sees the other's changes unless they go through git, so git is t
 - Local sessions: `local/<topic>`. Cloud sessions: the assigned `claude/<id>` branch.
 - Never commit directly to `main`; merge via PR. Never force-push.
 
+### Naming (branches and PRs)
+- Branches Claude creates itself: `<prefix>/<short-kebab-topic>`, e.g. `claude/phase-docs-reorg`, `local/vault-lint` — never a random slug.
+- Cloud sessions are often handed a random `claude/<adjective-name-id>` branch. Keep working on it (don't push to another branch without asking), but make the PR title carry the meaning.
+- PR titles: an imperative, specific summary of the change, e.g. "Move phase docs into docs/phases/". Never a branch name, a slug, or a generic "Update docs". If a PR was opened with a placeholder or branch-derived title, rename it.
+- PR descriptions: say what changed and why; one PR per finished unit of work, targeting `main`.
+
 ### Session start
 - A hook prints a "Git sync report" if the remote has commits this branch lacks.
   If it does, merge the named branch before editing.
