@@ -90,7 +90,7 @@ Follow with 1–3 lines: notes created/changed, anything flagged. Never edit pas
 
 **Ingest** — a new source arrives.
 1. Read it; tell me the key takeaways and what you plan to create.
-2. Create atomic notes per the rules above (course PDFs from Drive: delegate to the `atomize-subject` agent; top-ups to `update-subject`).
+2. Create atomic notes per the rules above (course PDFs from Drive: delegate to the `atomize-subject` agent, top-ups to `update-subject`; any other source: the `ingest-source` agent).
 3. Update the subject MOC, `MOCs/Tags MOC.md` (new tags only) and `index.md`.
 4. Where an existing note is affected, apply only the append-only edits, or list suggested changes for me to approve.
 5. Append a `log.md` entry.
@@ -102,7 +102,7 @@ Follow with 1–3 lines: notes created/changed, anything flagged. Never edit pas
 
 **Lint** — periodic health check (the `lint-vault` agent). Report first; fix only what I approve. Looks for: orphan notes, concepts mentioned with no note, contradictions between notes, stale `#status/unverified` / `#status/review-needed`, tag synonyms vs the Tags MOC, missing/blank frontmatter, non-`DD/MM/YYYY` dates, notes absent from `index.md` or a MOC, and an `Inbox/` backlog.
 
-**Inbox refile** — move each `Inbox/` note into `Study/<Subject>/`, apply Atomic Card frontmatter, add it to the subject MOC and `index.md`.
+**Inbox refile** (the `refile-inbox` agent) — move each `Inbox/` note into `Study/<Subject>/`, apply Atomic Card frontmatter, add it to the subject MOC and `index.md`.
 
 ## Guardrails
 
