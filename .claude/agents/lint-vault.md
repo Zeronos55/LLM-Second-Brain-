@@ -22,7 +22,7 @@ Whole vault by default. If the user names a subject or folder, limit to it, but 
 3. **Links and navigation.** Orphan notes (no inbound links); notes missing from `index.md` or their subject MOC; broken `[[wikilinks]]`; notes whose Related section is empty.
 4. **Missing concepts.** Terms repeatedly mentioned in bodies (or as unresolved wikilinks) that have no note of their own.
 5. **Contradictions and staleness.** Notes giving different values or definitions for the same quantity or concept; notes carrying `#status/unverified` or `#status/review-needed` for a long time or whose callouts a later note appears to resolve; `[!note] Re-verified` markers whose flag the user has not yet cleared.
-6. **Filing.** `Inbox/` backlog size and age; notes sitting in the wrong `Study/` folder; subject folders with fewer than ~5 notes; duplicate-concept notes.
+6. **Filing.** `Inbox/` backlog size and age; notes sitting in the wrong `Study/YEAR <N>/` folder or subject folder; subject folders with fewer than ~5 notes; duplicate-concept notes.
 7. **Bookkeeping.** `index.md` entries pointing at missing notes or with a summary that no longer matches the note; `log.md` prefix format; `MOCs/Legacy/` catalog rows whose linked notes don't exist.
 
 ## Report

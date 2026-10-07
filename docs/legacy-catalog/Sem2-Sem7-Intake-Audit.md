@@ -53,6 +53,8 @@ Also: **the original `.zip` files are still sitting in Drive alongside every unz
   - `T2 Annuities.pdf` — 10,245,489 bytes (~10.2MB)
 - **Duplicate confirmed:** `Formula List.pdf` and `Formula List-1.pdf` — **identical size** (415,721 bytes) — near-certain duplicate.
 - **Gap check:** T1–T7 and L1–L7 both complete. No gaps.
+- **Atomized 06/10/2026 (course code MAT1054):** L1–L7 and T2–T7 → atomized (concept notes, worked examples and `… Tutorial N Worked Solutions` notes in the vault; see `MOCs/Theory of Interest MOC` and `MOCs/Legacy/MAT1054 Catalog`). `T1 Interest Rate Measurement.pdf` → atomized from Drive's text reader but **not archived** (10,700,099 bytes exceeds the connector's 10 MB limit; Drive file id `1TRMJx9tnR2hhYRDi1iYm8u7QQ1jF_qan`, download manually). `Formula List.pdf` / `Formula List-1.pdf` → confirmed duplicate (identical rendering), referenced only. `MAT1054 Group Assignment 092024-2.pdf` → referenced only (graded, 30%). T2 (10,245,489 bytes) downloaded successfully despite the oversize flag.
+- **Top-up 07/10/2026 (update-subject):** `T1 Interest Rate Measurement.pdf` → now archived as `Attachments/Legacy/MAT1054/MAT1054_Tutorial-01-Interest-Rate-Measurement.pdf` and re-verified against the PDF (atomized → `Interest Rate Measurement Tutorial 1 Worked Solutions`). `MAT1054 Group Assignment 092024-2.pdf` → atomized → `Theory of Interest Group Assignment Worked Solutions` (solved for the handwritten group values i=8, j=11, k=22; unverified).
 
 ### Advanced Calculus (17 files)
 - **Oversized (>10MB):**
