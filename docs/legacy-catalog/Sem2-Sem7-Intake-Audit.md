@@ -115,6 +115,7 @@ Also: **the original `.zip` files are still sitting in Drive alongside every unz
   - `Sample Finals.pdf` — 14,450,725 bytes (~14.5MB)
 - **Flagged (possible duplicate, unconfirmed):** `Sample Finals.pdf` (14.5MB) vs `1_Sample Finals.pdf` (9.7MB) — different sizes, so not confirmed identical, but similar enough names to be worth checking whether one is questions and the other solutions, or an old vs. new version.
 - **Gap check:** Chapters 1.0–8.0 and Tutorials 1–8 both complete.
+- **Update (2026-10-08):** atomized into the vault (`MOCs/Legacy/MAT2094 Catalog.md`): Chapters 1–8 verified, Tutorials 1–8, Revision Set 1 and Sample Finals 1 atomized as Worked Solutions notes. The `Sample Finals.pdf` vs `1_Sample Finals.pdf` flag is resolved as **the same exam paper with different handwritten solutions** (14.5 MB file read via Drive text extraction); the 14.5 MB file is still not archived (download limit) and needs a manual download to `Attachments/Legacy/MAT2094/MAT2094_Sample-Finals.pdf`.
 
 ---
 
