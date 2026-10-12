@@ -2,7 +2,7 @@
 
 **Status:** Planning — not yet started
 
-**Relationship to existing app:** Complements the Claude.ai React second-brain app (Index/Recall tabs). That app stays your cross-device recall layer (laptop/iPad/phone). This stack is a desktop-based, deeper layer on top of your Obsidian vault — the thing you already use for note-taking and as the source for markdown imports into the React app.
+**Scope:** a desktop-based AI layer on top of your existing Obsidian vault, which you already use for note-taking.
 
 **Machine:** 8GB RAM total → every model choice below is picked to leave headroom for Obsidian + everything else you have open while studying.
 
@@ -40,7 +40,7 @@ Two separate connection types, both pointed at the same vault:
 - **Plugin → Ollama (or cloud API):** Smart Connections and Copilot talk to a model backend for embeddings and chat, entirely inside Obsidian.
 - **Plugin → MCP → Claude:** the Local REST API plugin exposes your vault over the Model Context Protocol, so Claude Code (or Claude Desktop, via a bridge) can read, search, and write notes directly — no copy-pasting markdown.
 
-This second path is what genuinely improves on your current React-app workflow: right now you paste markdown into the app manually. MCP lets an AI agent act on the vault itself.
+This second path is what genuinely improves on manual copy-paste workflows: MCP lets an AI agent act on the vault itself.
 
 ## Phase 1 — Vault foundations (no new tools yet)
 
@@ -49,7 +49,7 @@ This second path is what genuinely improves on your current React-app workflow: 
 Before installing anything, make the vault worth indexing:
 
 - Confirm one consistent structure: folders like `Projects/`, `Study/`, `MOCs/` (maps of content), `Templates/`.
-- Add YAML frontmatter to notes you want the AI layer to reason well about — at minimum `tags`, `created`, and a one-line `summary`. Your existing preference for atomic, single-concept cards (proven out in the React app) carries over directly here — it's exactly what makes embedding-based retrieval work well.
+- Add YAML frontmatter to notes you want the AI layer to reason well about — at minimum `tags`, `created`, and a one-line `summary`. Your existing preference for atomic, single-concept cards carries over directly here — it's exactly what makes embedding-based retrieval work well.
 - Pick a tagging convention now (e.g. `#stochastic-processes`, `#brownian-motion`) rather than after the index is built — re-tagging later means re-embedding.
 
 This phase costs nothing but time and pays off in every later phase.
@@ -70,12 +70,12 @@ Ollama is the model backend Smart Connections and Copilot will call in Phases 3�
 - Install Smart Connections from the Obsidian community plugin browser.
 - Point it at your local Ollama embedding endpoint (`nomic-embed-text`).
 - Let it build the vault-wide embedding index (this can take a while depending on vault size — let it run in the background, don't interrupt it).
-- Once built, it surfaces "related notes" as you write and enables semantic (not keyword) search across the vault — the same principle you already validated in the React app ("semantic LLM retrieval outperforms keyword scoring for this use case"), just running locally over the whole vault instead of only what you've manually filed into cards.
+- Once built, it surfaces "related notes" as you write and enables semantic (not keyword) search across the vault — semantic LLM retrieval tends to outperform keyword scoring for this use case, and here it runs locally over the whole vault.
 
 ## Phase 4 — Chat layer (Copilot for Obsidian)
 
 - Install Copilot for Obsidian, point it at Ollama (or a cloud key) for chat.
-- Use Vault QA mode to ask questions against the whole indexed vault — this is your "Recall" tab, but scoped to everything in Obsidian rather than only what's been imported into the React app.
+- Use Vault QA mode to ask questions against the whole indexed vault — a recall layer scoped to everything in Obsidian.
 - Try its custom prompt templates for recurring actuarial-study tasks (e.g. "generate 5 practice questions from this note," "summarize this chapter into an atomic card").
 
 At this point you've replicated what both articles describe. The rest is the MCP layer, which neither Obsidian-plugin article actually covered — only the second one mentioned it, and only in outline.
@@ -103,10 +103,9 @@ This is a single plugin, not a separate MCP server to build yourself:
 
 Both source articles stop at "plug it in and chat." Given your actual use case, the higher-leverage moves are:
 
-1. **Close the loop with the React app.** Right now import is one-directional (Obsidian → paste → React app). With MCP, you could have Claude Code periodically pull newly-tagged Obsidian notes and reformat them into the atomic-card structure your React app expects, cutting out the manual paste step — worth prototyping once Phase 5 is stable.
-2. **Template-driven study workflows**, using Text Generator or Copilot's custom prompts: a "chapter → atomic cards" pipeline that takes a longer note and splits it into the single-concept cards you've already found work best for recall.
-3. **A standing tagging taxonomy note (a MOC)** that Claude reads via MCP before filing new notes, so machine-filed notes stay consistent with your existing tags instead of drifting into synonyms.
-4. **Formula handling:** your React app already solved handwritten-LaTeX-via-vision capture. Nothing here replicates that — keep using it for formula capture, and have MCP-driven note generation reference/link to those cards rather than re-deriving LaTeX from scratch.
+1. **Template-driven study workflows**, using Text Generator or Copilot's custom prompts: a "chapter → atomic cards" pipeline that takes a longer note and splits it into the single-concept cards you've already found work best for recall.
+2. **A standing tagging taxonomy note (a MOC)** that Claude reads via MCP before filing new notes, so machine-filed notes stay consistent with your existing tags instead of drifting into synonyms.
+3. **Formula handling:** keep handwritten-LaTeX captures in `Attachments/` and have MCP-driven note generation reference/link to them rather than re-deriving LaTeX from scratch.
 
 ## Testing / verification checklist
 
@@ -118,4 +117,4 @@ Both source articles stop at "plug it in and chat." Given your actual use case, 
 
 ## Open question to revisit later
 
-**Cross-device access:** this whole stack is desktop-only by nature (Ollama and the MCP plugin both run on one machine). If down the line you want the Obsidian side itself synced to iPad/phone (separately from the AI layer), that's a vault-sync problem — Obsidian Sync (paid), iCloud, or Syncthing — not something MCP or these plugins solve. Not needed for this plan since the React app already covers your cross-device recall case, but worth remembering it's a separate concern if priorities shift.
+**Cross-device access:** this whole stack is desktop-only by nature (Ollama and the MCP plugin both run on one machine). If down the line you want the Obsidian side itself synced to iPad/phone (separately from the AI layer), that's a vault-sync problem — Obsidian Sync (paid), iCloud, or Syncthing — not something MCP or these plugins solve. Not needed for this plan, but worth remembering it's a separate concern if priorities shift.
