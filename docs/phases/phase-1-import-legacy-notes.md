@@ -76,7 +76,7 @@ This is where the backlog turns into real Phase 3/4-searchable atomic notes, but
 
 1. **Trigger:** you're restudying or referencing a topic and the catalog (or memory) points at a legacy PDF that covers it.
 2. **Extract:** once Phase 5 (MCP) is live, ask Claude to open that PDF via the vault connection and draft Atomic Card notes for the concepts on the relevant pages, using the Phase 1 template and checking `Tags MOC.md` before proposing new tags. Before Phase 5 exists, do the same thing manually in a Claude chat with the PDF attached — the workflow doesn't require MCP, MCP just makes it "ask in Obsidian" instead of "paste into a chat."
-3. **Review:** treat every draft as needing a human pass, same discipline as the React app's handwritten-LaTeX capture — annotated handwriting and formulas are exactly where transcription errors hide.
+3. **Review:** treat every draft as needing a human pass, the same discipline applies to handwritten-LaTeX captures — annotated handwriting and formulas are exactly where transcription errors hide.
 4. **File:** save the accepted notes into `Study/<Subject>/`, add them to that subject's MOC, and set `source: "[[Attachments/Legacy/STAT-431/STAT-431_Tutorial-03-Martingales.pdf]]"` in the new note's frontmatter so it stays traceable back to the original scan. (`source` is a useful optional field beyond just legacy import — e.g. citing a textbook chapter — so it's worth adding to the general frontmatter schema, not only legacy-derived notes.)
 5. **Update the catalog:** flip that row's Status from `unprocessed` to `atomized → [[Martingale Property]], [[Stopping Time]]`, so the catalog stays an accurate map of what's still raw versus what's already in the atomic system.
 

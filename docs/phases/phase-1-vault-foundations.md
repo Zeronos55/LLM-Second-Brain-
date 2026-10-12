@@ -26,9 +26,9 @@ Vault/
 Rules of thumb:
 
 - **Don't pre-create every subject folder.** Start with `Inbox/` and one or two `Study/` folders for whatever you're actively studying now. A subject earns its own folder once it has ~5+ atomic notes; before that, a few loose notes in `Inbox/` or a temporary catch-all are fine. Pre-provisioning empty folders just creates decision fatigue later.
-- **`Projects/` is not `Study/`.** Study notes are atomic, reusable concept cards. Projects are things with an end state (e.g. "build the Obsidian→React import bridge" from Phase 6, or "Exam P study schedule"). Don't let study material drift into Projects or vice versa.
+- **`Projects/` is not `Study/`.** Study notes are atomic, reusable concept cards. Projects are things with an end state (e.g. "Exam P study schedule"). Don't let study material drift into Projects or vice versa.
 - **`MOCs/` is the index layer.** Every `Study/<Subject>/` folder gets exactly one MOC note (`MOCs/<Subject> MOC.md`) that links out to its atomic notes, grouped by subtopic. This is what makes the vault navigable before Smart Connections exists, and it's what Smart Connections' "related notes" will reinforce, not replace.
-- **`Attachments/` centralizes non-markdown files** so `Study/` stays pure markdown — keeps future embedding/indexing (Phase 3) clean, and matches Phase 6's note that handwritten-LaTeX captures should be referenced from atomic notes, not re-derived.
+- **`Attachments/` centralizes non-markdown files** so `Study/` stays pure markdown — keeps future embedding/indexing (Phase 3) clean, and matches the Phase 6 note that handwritten-LaTeX captures should be referenced from atomic notes, not re-derived.
 
 ## 2. Frontmatter schema
 
@@ -76,7 +76,7 @@ Seed `MOCs/Tags MOC.md` with the topic tags you already know you'll need (probab
 
 - **Note title = filename**, Title Case, descriptive enough to stand alone as a link (`Martingale Property.md`, not `Notes 3.md`).
 - **No IDs or dates in filenames.** This isn't a Zettelkasten-ID system — the MOC layer is the index, so filenames should optimize for readability as link text, not for sortability.
-- **One concept per note**, carried over directly from the React app's atomic-card discipline: if a note needs an "and" in its title to describe what it covers, it's probably two notes.
+- **One concept per note**, the atomic-card discipline: if a note needs an "and" in its title to describe what it covers, it's probably two notes.
 
 ## 5. Templates
 
