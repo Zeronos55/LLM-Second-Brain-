@@ -17,3 +17,4 @@ Planning docs:
     - [Vault `CLAUDE.md`](docs/vault-CLAUDE.md)
     - [`index.md` seed](docs/vault-index-template.md)
     - [`log.md` seed](docs/vault-log-template.md)
+  - [`scripts/sync-vault.sh`](scripts/sync-vault.sh) — checks the vault's `CLAUDE.md` against the template; `--apply` updates it (vault path: `VAULT_PATH`, default `D:\LLM`)
