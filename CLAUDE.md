@@ -16,6 +16,7 @@ Neither session sees the other's changes unless they go through git, so git is t
 ### Branches
 - Local sessions: `local/<topic>`. Cloud sessions: the assigned `claude/<id>` branch.
 - Never commit directly to `main`; merge via PR. Never force-push.
+- `main` is home base: every session starts on an up-to-date `main` and ends back on it once the work is merged. Work happens on a short-lived topic branch cut from `main`, never on a leftover branch.
 
 ### Naming (branches and PRs)
 - Branches Claude creates itself: `<prefix>/<short-kebab-topic>`, e.g. `claude/phase-docs-reorg`, `local/vault-lint` — never a random slug.
@@ -24,12 +25,19 @@ Neither session sees the other's changes unless they go through git, so git is t
 - PR descriptions: say what changed and why; one PR per finished unit of work, targeting `main`.
 
 ### Session start
+- Start on `main`: `git fetch origin --prune`, then `git switch main` and `git merge --ff-only origin/main`.
+  Before editing anything, cut the topic branch from it (`git switch -c <prefix>/<topic>`).
+- Cloud sessions are handed a `claude/<id>` branch instead. If its PR is already merged or the remote branch is gone,
+  reset it to the latest `main` first (`git checkout -B <branch> origin/main`) so no old commits ride along.
 - A hook prints a "Git sync report" if the remote has commits this branch lacks.
   If it does, merge the named branch before editing.
 
 ### After significant work
 - When you finish a significant change (new/edited doc, new file, restructure), say so and
   offer to commit and push. A hook also reminds the user about uncommitted or unpushed work.
+- Work is complete once its PR is merged. Then return to `main`: `git switch main`, `git pull --ff-only`,
+  and delete the merged local branch (`git branch -d <branch>`). The remote branch deletes itself on merge.
+  Confirm `git status` is clean on `main` before ending the session.
 
 ### Handoff
 - Leaving a side: "commit and push everything", then confirm no unpushed-work reminder remains.
