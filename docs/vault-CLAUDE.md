@@ -2,7 +2,7 @@
 
 > **How to use this file:** copy everything below the line into `CLAUDE.md` at the **root of your Obsidian vault**. Claude Code loads it automatically when launched from inside the vault (`cd` into the vault, run `claude`). A session connected only through the Local REST API / MCP bridge does *not* auto-load it — tell that session to read `CLAUDE.md` at the vault root first.
 >
-> This repo copy is the source of truth for the template. When Phase 1 conventions change, update this file and re-copy it. Rationale for each rule lives in [Phase 1 — Vault Foundations](phases/phase-1-vault-foundations.md) and [Importing Legacy Annotated Notes](phases/phase-1-import-legacy-notes.md); the vault copy is deliberately self-contained and does not depend on them.
+> This repo copy is the source of truth for the template. When Phase 1 conventions change, update this file and run `scripts/sync-vault.sh --apply` to push it (and the agents) into the vault. Rationale for each rule lives in [Phase 1 — Vault Foundations](phases/phase-1-vault-foundations.md) and [Importing Legacy Annotated Notes](phases/phase-1-import-legacy-notes.md); the vault copy is deliberately self-contained and does not depend on them.
 
 ---
 
@@ -17,6 +17,9 @@ This vault is a personal knowledge base maintained by an LLM and read by me. I c
 | Raw sources | `Attachments/` (incl. `Attachments/Legacy/<Code>/`) | **Immutable.** Read from it, never edit, rename or delete. |
 | Wiki | `Study/`, `MOCs/`, `Projects/`, `index.md`, `log.md` | You own and maintain this layer. |
 | Schema | this file | Co-evolved with me; propose changes, don't silently deviate. |
+| Agents | `.claude/agents/` | Run them; never edit them here. |
+
+This file and `.claude/agents/` are **copies** of the master versions in the LLM-Second-Brain- planning repo, which pushes them here with `scripts/sync-vault.sh --apply`. Edits made in the vault get flagged as drift and are lost on the next forced sync. To change a rule or an agent, propose the change and make it in the planning repo.
 
 ## Folder structure
 
