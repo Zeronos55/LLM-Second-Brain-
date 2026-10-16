@@ -19,7 +19,7 @@ This vault is a personal knowledge base maintained by an LLM and read by me. I c
 | Schema | this file | Co-evolved with me; propose changes, don't silently deviate. |
 | Agents | `.claude/agents/` | Run them; never edit them here. |
 
-This file and `.claude/agents/` are **copies** of the master versions in the LLM-Second-Brain- planning repo, which pushes them here with `scripts/sync-vault.sh --apply`. Edits made in the vault get flagged as drift and are lost on the next forced sync. To change a rule or an agent, propose the change and make it in the planning repo.
+This file and `.claude/agents/` are **copies** of the master versions in the LLM-Second-Brain- planning repo, which pushes them here with `scripts/sync-vault.sh --apply`. A SessionStart hook (`.claude/hooks/vault-drift-check.sh`) warns at session start when these copies differ from the repo. If it does, tell me before running any agent. Edits made in the vault get flagged as drift and are lost on the next forced sync. To change a rule or an agent, propose the change and make it in the planning repo.
 
 ## Folder structure
 

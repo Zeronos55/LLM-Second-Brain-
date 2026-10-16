@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 # Compare (and optionally update) the vault's copies of the files this repo owns:
 #   docs/vault-CLAUDE.md    -> <vault>/CLAUDE.md
-#   .claude/agents/*.md     -> <vault>/.claude/agents/*.md
+#   .claude/agents/*.md     -> <vault>/.claude/agents/*.md   (except repo-only agents such as sync-vault)
+#   scripts/vault-hooks/*   -> <vault>/.claude/hooks/*       (the vault's SessionStart drift check)
 #
 #   scripts/sync-vault.sh                    report drift only (read-only)
 #   scripts/sync-vault.sh --apply            copy repo versions into the vault (old copies kept as *.bak)
@@ -89,10 +90,23 @@ sync_file() {
   fi
 }
 
+repo_only_agents=" sync-vault.md "   # agents that only make sense in a repo session
+
 sync_file "$tmp/CLAUDE.md" "CLAUDE.md"
 for agent in "$repo"/.claude/agents/*.md; do
+  case "$repo_only_agents" in *" $(basename "$agent") "*) continue ;; esac
   sync_file "$agent" ".claude/agents/$(basename "$agent")"
 done
+for hook in "$repo"/scripts/vault-hooks/*.sh; do
+  sync_file "$hook" ".claude/hooks/$(basename "$hook")"
+done
+
+# The drift-check hook only runs if the vault's settings.json registers it. settings.json can hold
+# the user's own vault settings, so it is never overwritten here; the sync-vault agent merges it in.
+if ! grep -q 'vault-drift-check.sh' "$vault/.claude/settings.json" 2>/dev/null; then
+  echo ".claude/settings.json: drift-check hook not registered — ask the sync-vault agent to register it"
+  status=1
+fi
 
 # Agents that exist only in the vault are not managed by the repo; flag them so they get moved over.
 for agent in "$vault"/.claude/agents/*.md; do
