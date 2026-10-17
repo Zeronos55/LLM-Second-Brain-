@@ -15,7 +15,7 @@ This vault is a personal knowledge base maintained by an LLM and read by me. I c
 | Layer | Where | Rule |
 |---|---|---|
 | Raw sources | `Attachments/` (incl. `Attachments/Legacy/<Code>/`) | **Immutable.** Read from it, never edit, rename or delete. |
-| Wiki | `Study/`, `MOCs/`, `Projects/`, `index.md`, `log.md` | You own and maintain this layer. |
+| Wiki | `Study/`, `Knowledge/`, `MOCs/`, `Projects/`, `index.md`, `log.md` | You own and maintain this layer. |
 | Schema | this file | Co-evolved with me; propose changes, don't silently deviate. |
 | Agents | `.claude/agents/` | Run them; never edit them here. |
 
@@ -26,7 +26,8 @@ This file and `.claude/agents/` are **copies** of the master versions in the LLM
 ```
 Inbox/         quick capture, unfiled; cleared on a regular review
 Study/YEAR <N>/<Subject>/   atomic notes; year = first digit after the course-code letters (MAT1054 → YEAR 1); one folder per subject, created once it has ~5+ notes
-Projects/      active work with a deliverable — not study notes
+Knowledge/<Topic>/   non-course atomic notes (books, articles, personal development); one folder per topic
+Projects/      details, builds and ideas for my own projects — not study or knowledge notes
 MOCs/          one "<Subject> MOC.md" per subject, "Tags MOC.md", and Legacy/ catalogs
 Templates/     Atomic Card, MOC
 Attachments/   non-markdown files; Legacy/<Code>/ holds archived source PDFs
@@ -35,11 +36,13 @@ index.md       vault-wide catalog (see below)
 log.md         append-only chronological record (see below)
 ```
 
-Don't pre-create empty subject folders. Keep `Study/` pure markdown.
+Don't pre-create empty subject folders. Keep `Study/` and `Knowledge/` pure markdown.
+
+**Course vs non-course:** course material (has a course code) goes in `Study/`; any other reusable knowledge goes in `Knowledge/<Topic>/`; anything about a project of mine (specs, build notes, ideas) goes in `Projects/`.
 
 ## Notes
 
-**Frontmatter** — every note under `Study/` and `MOCs/`:
+**Frontmatter** — every note under `Study/`, `Knowledge/` and `MOCs/`:
 
 | Field | Required | Rule |
 |---|---|---|
@@ -75,7 +78,7 @@ Those eight fields only — **do not invent more.** Dates are always `DD/MM/YYYY
 
 ## `index.md`
 
-Vault-root catalog of every note under `Study/` (and notable `Projects/`), grouped by subject then subtopic. One line per note: `- [[Note Title]] — <its summary>`. Update it on every ingest. **When answering a question, read `index.md` first**, then open the relevant notes. It coexists with subject MOCs (navigation within a subject) and `MOCs/Legacy/` catalogs (per-source-file status); it does not replace them.
+Vault-root catalog of every note under `Study/` and `Knowledge/` (and notable `Projects/`), grouped by subject or topic then subtopic. One line per note: `- [[Note Title]] — <its summary>`. Update it on every ingest. **When answering a question, read `index.md` first**, then open the relevant notes. It coexists with subject MOCs (navigation within a subject) and `MOCs/Legacy/` catalogs (per-source-file status); it does not replace them.
 
 ## `log.md`
 
@@ -101,11 +104,11 @@ Follow with 1–3 lines: notes created/changed, anything flagged. Never edit pas
 **Query** — I ask a question.
 1. Read `index.md`, then drill into relevant notes. Don't answer from memory when the vault covers it.
 2. Answer with `[[note]]` citations; say plainly when the vault doesn't cover something.
-3. If the answer is valuable (a comparison, an analysis, a connection), offer to file it back as a new note — `Study/` for reusable knowledge, `Projects/` for deliverables — with `source` stating it is a synthesis and which notes it draws on. File it only after I agree, then update `index.md` and `log.md`.
+3. If the answer is valuable (a comparison, an analysis, a connection), offer to file it back as a new note — `Study/` for course knowledge, `Knowledge/` for non-course knowledge, `Projects/` for project work — with `source` stating it is a synthesis and which notes it draws on. File it only after I agree, then update `index.md` and `log.md`.
 
 **Lint** — periodic health check (the `lint-vault` agent). Report first; fix only what I approve. Looks for: orphan notes, concepts mentioned with no note, contradictions between notes, stale `#status/unverified` / `#status/review-needed`, tag synonyms vs the Tags MOC, missing/blank frontmatter, non-`DD/MM/YYYY` dates, notes absent from `index.md` or a MOC, and an `Inbox/` backlog.
 
-**Inbox refile** (the `refile-inbox` agent) — move each `Inbox/` note into `Study/YEAR <N>/<Subject>/`, apply Atomic Card frontmatter, add it to the subject MOC and `index.md`.
+**Inbox refile** (the `refile-inbox` agent) — move each `Inbox/` note into `Study/YEAR <N>/<Subject>/` (or `Knowledge/<Topic>/` if non-course), apply Atomic Card frontmatter, add it to the subject MOC and `index.md`.
 
 ## Guardrails
 
@@ -113,3 +116,4 @@ Follow with 1–3 lines: notes created/changed, anything flagged. Never edit pas
 - Don't expose or reconfigure the Local REST API port beyond `127.0.0.1`.
 - When unsure whether something belongs in a note, ask rather than guess.
 - Unverified, handwriting-derived or AI-solved content still needs my own check before I rely on it for exams.
+- Where a question has several handwritten workings (rough attempt and redo, or duplicate copies), use the correct or more complete one and ignore the rest; don't compare against or flag rough/duplicate attempts.
