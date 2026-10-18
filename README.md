@@ -2,7 +2,7 @@
 
 Planning docs:
 
-- [Obsidian + Local LLM + MCP — Build Plan](docs/obsidian-local-llm-mcp-plan.md)
+- Phase docs: how each part of the built system works
   - [Phase 1 — Vault Foundations (detailed)](docs/phases/phase-1-vault-foundations.md)
   - [Importing Legacy Annotated Notes](docs/phases/phase-1-import-legacy-notes.md)
     - [Sem1 — Economics Catalog](docs/legacy-catalog/Sem1/Economics%20Catalog.md)
@@ -13,9 +13,13 @@ Planning docs:
   - [Phase 3 — Semantic Layer / Smart Connections (detailed)](docs/phases/phase-3-smart-connections.md)
   - [Phase 4 — Chat Layer / Copilot for Obsidian (detailed)](docs/phases/phase-4-copilot-chat.md)
   - [Phase 5 — MCP Bridge / Local REST API (detailed)](docs/phases/phase-5-mcp-bridge.md)
-  - Vault schema templates (copy into the vault root)
-    - [Vault `CLAUDE.md`](docs/vault-CLAUDE.md)
-    - [`index.md` seed](docs/vault-index-template.md)
-    - [`log.md` seed](docs/vault-log-template.md)
-  - [`scripts/sync-vault.sh`](scripts/sync-vault.sh) — checks the vault's `CLAUDE.md` and `.claude/agents/` against this repo. `--apply` updates them but skips files edited inside the vault; `--apply --force` overwrites those too, after you've merged their changes here (vault path: `VAULT_PATH`, default `D:\LLM`). It also copies [`scripts/vault-hooks/vault-drift-check.sh`](scripts/vault-hooks/vault-drift-check.sh), a vault SessionStart hook that warns when the vault copies are out of date (repo path: `LLM_REPO`, default `D:\LLM-repo`)
-  - [`sync-vault` agent](.claude/agents/sync-vault.md): runs the sync from a local repo session, merges edits made in the vault back into the repo through a PR, and registers the hook
+- Vault schema templates (copy into the vault root)
+  - [Vault `CLAUDE.md`](docs/vault-CLAUDE.md)
+  - [`index.md` seed](docs/vault-index-template.md)
+  - [`log.md` seed](docs/vault-log-template.md)
+- [`scripts/sync-vault.sh`](scripts/sync-vault.sh) — checks the vault's `CLAUDE.md` and `.claude/agents/` against this repo. `--apply` updates them but skips files edited inside the vault; `--apply --force` overwrites those too, after you've merged their changes here (vault path: `VAULT_PATH`, default `D:\LLM`). It also copies [`scripts/vault-hooks/vault-drift-check.sh`](scripts/vault-hooks/vault-drift-check.sh), a vault SessionStart hook that warns when the vault copies are out of date (repo path: `LLM_REPO`, default `D:\LLM-repo`)
+- [`sync-vault` agent](.claude/agents/sync-vault.md): runs the sync from a local repo session, merges edits made in the vault back into the repo through a PR, and registers the hook
+
+Archive:
+
+- [Obsidian + Local LLM + MCP — Build Plan](docs/archive/obsidian-local-llm-mcp-plan.md): the original build plan. All phases are complete; archived 18/10/2026.
