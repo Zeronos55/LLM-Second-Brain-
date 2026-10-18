@@ -64,6 +64,7 @@ Also: **the original `.zip` files are still sitting in Drive alongside every unz
   - `Lecture_Notes_(Chapter_2)_MAT1044_Advanced_Calculus_Sep2024.pdf` — 12,036,435 bytes (~12.0MB)
   - `Tutorial_4_(Problem)_MAT1044_Advanced_Calculus_Sep2024.pdf` — 10,622,422 bytes (~10.6MB)
 - **Gap check:** Tutorials 1–5 and Chapters 1–5 both complete. No gaps.
+- **Atomized 12/10/2026 (course code MAT1044, Advanced Calculus):** all 17 files atomized into `Study/YEAR 1/Advanced Calculus/` (65 concept notes, 22 worked-example notes, 11 tutorial/quiz/revision/assignment solution notes; see `MOCs/Advanced Calculus MOC` and `MOCs/Legacy/MAT1044 Catalog`). 13 PDFs archived under `Attachments/Legacy/MAT1044/`. The four oversized files (Chapter 1 and Chapter 2 lecture notes, Tutorial 1, Tutorial 4) were read through Drive's text reader only and are **not archived** (download manually to `MAT1044_Chapter-01-Partial-Derivatives.pdf`, `MAT1044_Chapter-02-Multiple-Integrals.pdf`, `MAT1044_Tutorial-01-Partial-Derivatives.pdf` and `MAT1044_Tutorial-04-Power-Series.pdf`); Tutorial 1 and Tutorial 4 notes are tagged unverified because their statements are partly illegible in the text layer. Ten source errata found (see the catalog `## Notes`).
 
 ---
 
