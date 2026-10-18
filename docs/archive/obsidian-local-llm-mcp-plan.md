@@ -1,6 +1,8 @@
 # Obsidian + Local LLM + MCP — Build Plan
 
-**Status:** Planning — not yet started
+**Status:** Completed. All phases (1–6) are done. Archived 18/10/2026.
+
+> **Archived.** This is the original build plan, kept as a record. The system is built: the per-phase docs in [`docs/phases/`](../phases/) are the reference for how each part works, and the vault `CLAUDE.md` ([template](../vault-CLAUDE.md)) holds the live conventions. New work gets its own doc rather than reopening this one.
 
 **Scope:** a desktop-based AI layer on top of your existing Obsidian vault, which you already use for note-taking.
 
@@ -44,7 +46,7 @@ This second path is what genuinely improves on manual copy-paste workflows: MCP 
 
 ## Phase 1 — Vault foundations (no new tools yet)
 
-> Detailed plan: [Phase 1 — Vault Foundations](phases/phase-1-vault-foundations.md)
+> Detailed plan: [Phase 1 — Vault Foundations](../phases/phase-1-vault-foundations.md)
 
 Before installing anything, make the vault worth indexing:
 
@@ -109,11 +111,11 @@ Both source articles stop at "plug it in and chat." Given your actual use case, 
 
 ## Testing / verification checklist
 
-- [ ] Ollama runs a chat model without visibly degrading normal study-session performance (test with Obsidian + browser open, not idle)
-- [ ] Smart Connections index completes and surfaces sensible related notes on a known pair of linked topics
-- [ ] Copilot vault QA correctly answers a question whose answer spans 2+ notes (tests retrieval, not just single-note recall)
-- [ ] MCP connection from Claude Code can read a note, then write a new one, then confirm it appears in Obsidian
-- [ ] Confirm the REST API port is not reachable from outside localhost (sanity check, e.g. `curl` from another device on the same network should fail)
+- [x] Ollama runs a chat model without visibly degrading normal study-session performance (test with Obsidian + browser open, not idle)
+- [x] Smart Connections index completes and surfaces sensible related notes on a known pair of linked topics
+- [x] Copilot vault QA correctly answers a question whose answer spans 2+ notes (tests retrieval, not just single-note recall)
+- [x] MCP connection from Claude Code can read a note, then write a new one, then confirm it appears in Obsidian
+- [x] Confirm the REST API port is not reachable from outside localhost (sanity check, e.g. `curl` from another device on the same network should fail)
 
 ## Open question to revisit later
 
