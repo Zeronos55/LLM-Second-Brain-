@@ -29,6 +29,12 @@ Read `CLAUDE.md` at the vault root in full first — frontmatter schema, tag tax
 
 7. **Bookkeeping.** Update the subject MOC (`MOCs/<Subject> MOC.md`, create from the MOC template if absent), `MOCs/Tags MOC.md` (new tags only), and `index.md` (one line per new note). Append `## [DD/MM/YYYY] ingest | <source title>` with 1–3 lines to `log.md`.
 
+8. **Commit and push, then ask once about the PR.** If this run changed anything in a git repository (e.g. `docs/legacy-catalog` entries in the planning repo at `D:\LLM-repo`), commit and push it without asking:
+   - Never commit to `main`. If that repo is on `main`, first update it (`git fetch origin && git merge --ff-only origin/main`) and cut a branch `local/ingest-<short-topic>`; otherwise commit on the current topic branch.
+   - Stage only the files this run changed, commit with a clear message (following that repo's `CLAUDE.md` commit conventions), and push with `git push -u origin <branch>`. Never force-push or skip hooks.
+   - Then ask the user **once**: "Open a PR for `<branch>` and merge it?" On yes, open the PR (title per that repo's naming rules) and merge it, then switch that repo back to `main`, pull, and delete the merged branch. If no GitHub tool is available, give the user the branch's compare URL instead. On no, leave the branch pushed and say so. Don't ask again in this run.
+   Vault content outside a git repo is simply left in place.
+
 ## Report
 
-End with: notes created (list), existing notes touched and exactly what was appended, tags reused vs new, errata/unverified items, any contradictions with existing notes, and anything in the source you deliberately skipped and why. Remind the user that AI-written examples and unverified items need their own check before exam use.
+End with: notes created (list), existing notes touched and exactly what was appended, tags reused vs new, errata/unverified items, any contradictions with existing notes, anything in the source you deliberately skipped and why, and what was committed and pushed (repo, branch, commit) plus whether the PR was opened and merged. Remind the user that AI-written examples and unverified items need their own check before exam use.

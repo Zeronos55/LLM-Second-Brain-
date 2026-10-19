@@ -7,7 +7,7 @@ This repo holds **planning docs and subagent definitions** for an Obsidian + loc
 - `.claude/agents/` holds `atomize-subject` (which now also tops up already-atomized subjects), `ingest-source`, `refile-inbox` and `lint-vault`, which run against the vault, plus `sync-vault`, which runs only in a local repo session and is never copied to the vault. The vault agents follow the vault `CLAUDE.md`, and fall back to the Phase 1 docs here only if it is unreachable. Don't restate vault conventions inside agent files — point to `CLAUDE.md`.
 - **This repo is the only place to edit the agents and the vault `CLAUDE.md`.** A session launched inside the vault loads the vault's *copies* (`<vault>/CLAUDE.md`, `<vault>/.claude/agents/`), not these files, so the two drift unless they are synced. After changing either, tell the user to run `scripts/sync-vault.sh --apply`, or to ask the `sync-vault` agent to "sync the vault" in a local repo session. A SessionStart hook in the vault (`scripts/vault-hooks/vault-drift-check.sh`, copied there by the sync) warns when the copies are out of date. A file the script reports as `EDITED IN VAULT` was changed in the vault: merge that change into the repo first, then run `--apply --force`.
 - Dates in `created` fields and `log.md` entries are `DD/MM/YYYY`.
-- Always ask the user before committing or pushing — never commit or push on your own.
+- Always ask the user before committing or pushing — never commit or push on your own. Exception: `atomize-subject` and `ingest-source` commit and push their own changes to a topic branch without asking, then ask once whether to open a PR and merge it.
 
 ## Working agreement for Claude sessions
 
@@ -44,3 +44,11 @@ Neither session sees the other's changes unless they go through git, so git is t
 - Leaving a side: "commit and push everything", then confirm no unpushed-work reminder remains.
 - Cloud -> local: `claude --teleport <session-id>`, or fetch and merge the cloud branch.
 - Local -> cloud: push the branch, then start the cloud session from it (or have it fetch and merge first).
+- **Automatic handoff note.** When a cloud session's change needs follow-up on the local side, end the commit message body with a `Local-Handoff:` section, before the trailers:
+  ```
+  Local-Handoff:
+  1. git switch main && git pull --ff-only
+  2. sync the vault (atomize-subject changed)
+  ```
+  Use one step per line and end the section with a blank line. Include "sync the vault" whenever an agent or `docs/vault-CLAUDE.md` changed, plus any local-only follow-up (a vault-session task, a check on the PC). Leave the section out when nothing needs doing locally. The SessionStart hook (`.claude/hooks/sync-check.sh`) prints these sections from commits on `origin/main` that the local checkout hasn't pulled yet.
+- **Acting on a handoff.** When the session-start report lists handoff steps, tell the user, then do them in order: pull first, then the rest. Ask before any step that writes outside this repo (syncing the vault, anything in the vault itself).

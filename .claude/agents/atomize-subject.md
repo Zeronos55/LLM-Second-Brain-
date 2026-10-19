@@ -122,7 +122,11 @@ Then read, if one exists:
 
 12. **Append to `log.md`.** Add one entry at the bottom of the vault-root `log.md`: `## [DD/MM/YYYY] ingest | <Code> <Subject>`, followed by 1–3 lines (notes created, errata/unverified counts). Append only; create `log.md` from the vault `CLAUDE.md` format if absent.
 
-13. **Offer to commit and push, if a git repository changed.** If this run changed anything in a git repository (e.g. `docs/legacy-catalog` entries in `D:\LLM-repo`), **ask the user** whether to commit and push — never commit or push without an explicit yes in this run. If they agree, commit on the current branch with a clear message and push. Vault content outside a git repo is simply left in place. Never force-push or skip hooks.
+13. **Commit and push, then ask once about the PR.** If this run changed anything in a git repository (e.g. `docs/legacy-catalog` entries in the planning repo at `D:\LLM-repo`), commit and push it without asking:
+   - Never commit to `main`. If that repo is on `main`, first update it (`git fetch origin && git merge --ff-only origin/main`) and cut a branch `local/atomize-<code>-<short-topic>`; otherwise commit on the current topic branch.
+   - Stage only the files this run changed, commit with a clear message (following that repo's `CLAUDE.md` commit conventions), and push with `git push -u origin <branch>`. Never force-push or skip hooks.
+   - Then ask the user **once**: "Open a PR for `<branch>` and merge it?" On yes, open the PR (title per that repo's naming rules) and merge it, then switch that repo back to `main`, pull, and delete the merged branch. If no GitHub tool is available, give the user the branch's compare URL instead. On no, leave the branch pushed and say so. Don't ask again in this run.
+   Vault content outside a git repo is simply left in place.
 
 ## Before you finish: the review report
 
@@ -135,5 +139,5 @@ Obsidian has no git-style diff or undo for this kind of bulk change, and existin
 - Every file skipped, flagged, or archived-but-not-atomized, and why (including anything needing manual download)
 - **Verification results (step 5), split into new notes vs existing notes verified:** how many formulas, worked examples and tutorial/workshop/assignment questions were independently recomputed; how many matched; every **source erratum** found (note, location, source value vs recomputed value); every rounding-only difference; and every item left **unverified** with the reason. List the notes carrying `#status/source-erratum` and `#status/unverified` separately so the user can jump straight to them. Be explicit about any questions with no source solution that you solved.
 - **Example audit:** how many existing notes already had fully worked examples, how many got a solved or illustrative example added (list them), and how many of those remain single-route/unverified
-- Where the `Attachments/Legacy/<Code>/` archive and `MOCs/Legacy/<Code> Catalog.md` ended up, so the user can jump straight to them, confirmation that `index.md` and `log.md` were updated, and whether you asked about a commit/push, the answer, and what was pushed
+- Where the `Attachments/Legacy/<Code>/` archive and `MOCs/Legacy/<Code> Catalog.md` ended up, so the user can jump straight to them, confirmation that `index.md` and `log.md` were updated, and what was committed and pushed (repo, branch, commit), whether the user wanted the PR opened and merged, and its link
 - A reminder that content marked unverified — handwriting-derived, OCR-unreadable, flagged `[!question]`, or AI-solved with no source answer — still needs a human pass before being trusted (Phase 1 import doc §5 step 3). Recomputation lowers the risk on everything else; it does not replace the user's own study check on exam-critical material.

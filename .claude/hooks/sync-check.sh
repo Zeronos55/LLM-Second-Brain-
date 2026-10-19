@@ -23,9 +23,24 @@ for ref in origin/main $(git for-each-ref --format='%(refname:short)' 'refs/remo
   fi
 done
 
+# Handoff notes: commits on origin/main this checkout lacks may end with a "Local-Handoff:"
+# section (written by the session that made them) listing follow-up steps for this side.
+handoff=""
+if git rev-parse --verify -q origin/main >/dev/null; then
+  handoff=$(git log --no-merges --reverse --format='@@commit@@%h %s%n%b' HEAD..origin/main 2>/dev/null | awk '
+    /^@@commit@@/ { sub(/^@@commit@@/, ""); commit = $0; inh = 0; next }
+    /^Local-Handoff:[[:space:]]*$/ { inh = 1; print "From " commit ":"; next }
+    inh && /^[[:space:]]*$/ { inh = 0; next }
+    inh { print "  " $0 }')
+fi
+
 if [ -n "$out" ]; then
   echo "Git sync report (other session may have pushed changes):"
   printf '%s' "$out"
   echo "Merge the relevant branch into this one before editing."
+fi
+if [ -n "$handoff" ]; then
+  echo "Handoff steps from merged work this checkout hasn't pulled yet (tell the user, then do them; ask before anything that writes outside this repo, e.g. syncing the vault):"
+  printf '%s\n' "$handoff"
 fi
 exit 0
