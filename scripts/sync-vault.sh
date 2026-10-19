@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Compare (and optionally update) the vault's copies of the files this repo owns:
 #   docs/vault-CLAUDE.md    -> <vault>/CLAUDE.md
-#   .claude/agents/*.md     -> <vault>/.claude/agents/*.md   (except repo-only agents such as sync-vault)
+#   .claude/agents/*.md     -> <vault>/.claude/agents/*.md   (including sync-vault, so the vault can sync itself)
 #   scripts/vault-hooks/*   -> <vault>/.claude/hooks/*       (the vault's SessionStart drift check)
 #
 #   scripts/sync-vault.sh                    report drift only (read-only)
@@ -90,11 +90,8 @@ sync_file() {
   fi
 }
 
-repo_only_agents=" sync-vault.md "   # agents that only make sense in a repo session
-
 sync_file "$tmp/CLAUDE.md" "CLAUDE.md"
 for agent in "$repo"/.claude/agents/*.md; do
-  case "$repo_only_agents" in *" $(basename "$agent") "*) continue ;; esac
   sync_file "$agent" ".claude/agents/$(basename "$agent")"
 done
 for hook in "$repo"/scripts/vault-hooks/*.sh; do

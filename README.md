@@ -18,7 +18,7 @@ Planning docs:
   - [`index.md` seed](docs/vault-index-template.md)
   - [`log.md` seed](docs/vault-log-template.md)
 - [`scripts/sync-vault.sh`](scripts/sync-vault.sh) — checks the vault's `CLAUDE.md` and `.claude/agents/` against this repo. `--apply` updates them but skips files edited inside the vault; `--apply --force` overwrites those too, after you've merged their changes here (vault path: `VAULT_PATH`, default `D:\LLM`). It also copies [`scripts/vault-hooks/vault-drift-check.sh`](scripts/vault-hooks/vault-drift-check.sh), a vault SessionStart hook that warns when the vault copies are out of date (repo path: `LLM_REPO`, default `D:\LLM-repo`)
-- [`sync-vault` agent](.claude/agents/sync-vault.md): runs the sync from a local repo session, merges edits made in the vault back into the repo through a PR, and registers the hook
+- [`sync-vault` agent](.claude/agents/sync-vault.md): runs the sync from a vault session or a local repo session (pulls `main` first), merges edits made in the vault back into the repo through a PR, and registers the hook
 
 Archive:
 

@@ -4,7 +4,7 @@
 #
 # Warns when the vault's CLAUDE.md or agents differ from the planning repo, so an agent
 # never runs on a stale copy without anyone noticing. It only reports; syncing is done
-# from a repo session ("sync the vault").
+# by the sync-vault agent ("sync the vault"), from this vault session or a repo session.
 #
 # Repo path: $LLM_REPO, else /d/LLM-repo (Git Bash), else D:/LLM-repo.
 vault="${CLAUDE_PROJECT_DIR:-$(pwd)}"
@@ -40,7 +40,7 @@ if [ "$rc" -eq 2 ]; then
   msg+="Vault drift check failed: $(printf '%s' "$report" | head -3)"$'\n'
 elif [ -n "$problems" ]; then
   msg+="Vault rules/agents differ from the planning repo:"$'\n'"$problems"$'\n'
-  msg+="Agents in this session may run on stale instructions. Before relying on them, open a session in the planning repo and ask it to \"sync the vault\". Do not edit CLAUDE.md or .claude/ here."$'\n'
+  msg+="Agents in this session may run on stale instructions. Before relying on them, say \"sync the vault\" (here or in a planning-repo session), then restart this session. Do not edit CLAUDE.md or .claude/ by hand."$'\n'
 fi
 
 [ -n "$msg" ] && say "$msg"
