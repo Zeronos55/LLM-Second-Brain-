@@ -25,7 +25,7 @@ This file and `.claude/agents/` are **copies** of the master versions in the LLM
 
 ```
 Inbox/         quick capture, unfiled; cleared on a regular review
-Study/YEAR <N>/<Subject>/   atomic notes; year = first digit after the course-code letters (MAT1054 → YEAR 1); one folder per subject, created once it has ~5+ notes
+Study/YEAR <N>/<Subject>/<Chapter>/   atomic notes; year = first digit after the course-code letters (MAT1054 → YEAR 1); one folder per subject, created once it has ~5+ notes, holding one subfolder per chapter named after the subject MOC's chapter headings (`Chapter N - Title`, `Lecture N - Title` or `Week N - Title`); tutorial, quiz and assessment notes go in the chapter they cover, otherwise in `Practice and Assessment`
 Knowledge/<Topic>/   non-course atomic notes (books, articles, personal development); one folder per topic
 Projects/      details, builds and ideas for my own projects — not study or knowledge notes
 MOCs/          one "<Subject> MOC.md" per subject, "Tags MOC.md", and Legacy/ catalogs
@@ -36,7 +36,7 @@ index.md       vault-wide catalog (see below)
 log.md         append-only chronological record (see below)
 ```
 
-Don't pre-create empty subject folders. Keep `Study/` and `Knowledge/` pure markdown.
+Don't pre-create empty subject or chapter folders. Keep `Study/` and `Knowledge/` pure markdown.
 
 **Course vs non-course:** course material (has a course code) goes in `Study/`; any other reusable knowledge goes in `Knowledge/<Topic>/`; anything about a project of mine (specs, build notes, ideas) goes in `Projects/`.
 
@@ -108,7 +108,7 @@ Follow with 1–3 lines: notes created/changed, anything flagged. Never edit pas
 
 **Lint** — periodic health check (the `lint-vault` agent). Report first; fix only what I approve. Looks for: orphan notes, concepts mentioned with no note, contradictions between notes, stale `#status/unverified` / `#status/review-needed`, tag synonyms vs the Tags MOC, missing/blank frontmatter, non-`DD/MM/YYYY` dates, notes absent from `index.md` or a MOC, and an `Inbox/` backlog.
 
-**Inbox refile** (the `refile-inbox` agent) — move each `Inbox/` note into `Study/YEAR <N>/<Subject>/` (or `Knowledge/<Topic>/` if non-course), apply Atomic Card frontmatter, add it to the subject MOC and `index.md`.
+**Inbox refile** (the `refile-inbox` agent) — move each `Inbox/` note into `Study/YEAR <N>/<Subject>/<Chapter>/` (or `Knowledge/<Topic>/` if non-course), apply Atomic Card frontmatter, add it to the subject MOC and `index.md`.
 
 ## Guardrails
 
