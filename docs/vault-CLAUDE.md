@@ -27,7 +27,7 @@ This file and `.claude/agents/` are **copies** of the master versions in the LLM
 Inbox/         quick capture, unfiled; cleared on a regular review
 Study/YEAR <N>/<Subject>/<Chapter>/   atomic notes; year = first digit after the course-code letters (MAT1054 → YEAR 1); one folder per subject, created once it has ~5+ notes, holding one subfolder per chapter named after the subject MOC's chapter headings (`Chapter N - Title`, `Lecture N - Title` or `Week N - Title`); tutorial, quiz and assessment notes go in the chapter they cover, otherwise in `Practice and Assessment`
 Knowledge/<Topic>/   non-course atomic notes (books, articles, personal development); one folder per topic
-Projects/      details, builds and ideas for my own projects — not study or knowledge notes
+Projects/<Project>/   one folder per project of mine, holding its idea and development as memory and context — not study or knowledge notes (rules in "Projects folder" below)
 MOCs/          one "<Subject> MOC.md" per subject, "Tags MOC.md", and Legacy/ catalogs
 Templates/     Atomic Card, MOC
 Attachments/   non-markdown files; Legacy/<Code>/ holds archived source PDFs
@@ -76,9 +76,24 @@ Those eight fields only — **do not invent more.** Dates are always `DD/MM/YYYY
 - Check for an existing note on a concept before creating one — extend by link, don't duplicate.
 - Content you solved or wrote yourself is labelled (*Solved by AI*, *Illustrative*).
 
+## Projects folder
+
+`Projects/<Project>/` is memory and context for a project of mine: what it is and how it got where it is. It holds two kinds of note, in this order:
+
+1. **Project overview** — `<Project>.md`, always first. It states the **idea**, the **purpose**, the **current state** and, under `## Repo README`, the project's README copied from its repo (headings demoted to sit below that section heading, relative links turned into absolute repo URLs, snapshot date stated). It ends with a **Major changes** list linking the change notes in chronological order.
+2. **Major-change notes** — one per major change, after the overview, one descriptive Title Case filename each (no dates in the filename; the change's date or date range is the first line of the body as `**Date of change:** DD/MM/YYYY`). Group the PRs or commits that make up one change into one note and cite them.
+
+What counts as a **major change**: new information that alters what the project is or how it is understood; a change of anatomy (architecture, stack, data model, folder structure); a change of scope or direction; a restructure, archive or restart. **Not every PR is major**: bug fixes, dependency bumps, UI polish, doc top-ups and routine catalog updates are not. Say in the overview when a minor change matters to the current state, but do not give it a note.
+
+Rules:
+- Notes use the same frontmatter as `Study/` notes, tagged `#project` plus topic tags checked against the Tags MOC; `source` cites the repo and the date it was read.
+- Never copy secrets (keys, tokens, passwords) from a repo into the vault; flag them in the overview instead.
+- Re-ingesting a repo: refresh the README snapshot and current state in the overview (the one allowed rewrite of a note body), add notes for new major changes, and leave past change notes alone except for append-only corrections.
+- List the overview and its change notes in `MOCs/Projects MOC.md` and `index.md`, in the same order.
+
 ## `index.md`
 
-Vault-root catalog of every note under `Study/` and `Knowledge/` (and notable `Projects/`), grouped by subject or topic then subtopic. One line per note: `- [[Note Title]] — <its summary>`. Update it on every ingest. **When answering a question, read `index.md` first**, then open the relevant notes. It coexists with subject MOCs (navigation within a subject) and `MOCs/Legacy/` catalogs (per-source-file status); it does not replace them.
+Vault-root catalog of every note under `Study/`, `Knowledge/` and `Projects/`, grouped by subject or topic then subtopic. One line per note: `- [[Note Title]] — <its summary>`. Update it on every ingest. **When answering a question, read `index.md` first**, then open the relevant notes. It coexists with subject MOCs (navigation within a subject) and `MOCs/Legacy/` catalogs (per-source-file status); it does not replace them.
 
 ## `log.md`
 
