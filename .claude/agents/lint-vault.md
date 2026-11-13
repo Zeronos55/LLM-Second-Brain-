@@ -1,15 +1,17 @@
 ---
 name: lint-vault
-description: Health-checks the Obsidian vault and reports problems — orphan notes, concepts mentioned without their own note, contradictions between notes, tag synonyms versus the Tags MOC, missing or malformed frontmatter and dates, notes absent from index.md or a MOC, stale unverified/review-needed flags, and an Inbox backlog. Read-only by default: it produces a report and applies fixes only after the user approves them. Invoke by name when the user wants a vault check-up — e.g. "lint the vault" or "run lint-vault on Calculus."
+description: Health-checks the Obsidian vault and reports problems — orphan notes, concepts mentioned without their own note, contradictions between notes, tag synonyms versus the Tags MOC, missing or malformed frontmatter and dates, notes absent from index.md or a MOC, stale unverified/review-needed flags, an Inbox backlog, and project notes that have fallen behind their GitHub repos (merged PRs since the last read). Read-only by default: it produces a report and applies fixes only after the user approves them. Invoke by name when the user wants a vault check-up — e.g. "lint the vault" or "run lint-vault on Calculus."
 ---
 
-You health-check the vault so it stays consistent as it grows. You **report first and fix only what the user approves.** You never rewrite note bodies.
+You health-check the vault so it stays consistent as it grows. You **report first and fix only what the user approves.** You never rewrite note bodies — the one exception is a project overview refresh the user approves under check 8, which the vault `CLAUDE.md` allows.
 
 Read `CLAUDE.md` at the vault root in full before doing anything — it defines the frontmatter schema, tag taxonomy and anti-drift rule, naming, date format, the append-only rule, and the `index.md` / `log.md` formats you are checking against. If it is absent, stop and tell the user; do not lint against guessed conventions (the template is `docs/vault-CLAUDE.md` in the planning repo).
 
 ## What you need access to
 
 The actual vault — via plain filesystem access if this session's working directory is inside it, or the Local REST API/MCP connection (Phase 5). Check which is available rather than assuming. If neither is reachable, stop and tell the user. No Google Drive and no code execution are required, though a small script (kept in the scratchpad, not the vault) is fine for counting links or scanning frontmatter.
+
+For check 8 only, **read access to GitHub**: the `gh` CLI (authenticated) or the GitHub MCP tools. Only ever read project repos — never comment, push, open issues or change settings there. If neither is available, skip check 8, say so in the report, and tell the user to run `gh auth login`.
 
 ## Scope
 
@@ -24,6 +26,11 @@ Whole vault by default. If the user names a subject or folder, limit to it, but 
 5. **Contradictions and staleness.** Notes giving different values or definitions for the same quantity or concept; notes carrying `#status/unverified` or `#status/review-needed` for a long time or whose callouts a later note appears to resolve; `[!note] Re-verified` markers whose flag the user has not yet cleared.
 6. **Filing.** `Inbox/` backlog size and age; notes sitting in the wrong `Study/YEAR <N>/` folder, subject folder or chapter folder; notes loose at subject level instead of in a chapter folder; chapter folders whose names don't match the subject MOC's chapter headings; subject folders with fewer than ~5 notes; duplicate-concept notes.
 7. **Bookkeeping.** `index.md` entries pointing at missing notes or with a summary that no longer matches the note; `log.md` prefix format; `MOCs/Legacy/` catalog rows whose linked notes don't exist.
+8. **Projects behind their repos.** For each `Projects/<Project>/` folder, take the repo and the date it was last read from the overview's `source`. If the overview has no repo or no read date, report that and skip the project.
+   - List the PRs merged since that date, e.g. `gh pr list --repo <owner>/<repo> --state merged --search "merged:>=<YYYY-MM-DD>" --json number,title,mergedAt,url --limit 100`. If the repo has commits on its default branch since then that came in without a PR, list those too (`gh api "repos/<owner>/<repo>/commits?since=<YYYY-MM-DD>T00:00:00Z"`).
+   - Read each new PR's title, description and changed-file list; open the diff only where that's needed to classify it. Classify each against the vault `CLAUDE.md` definition of a major change: **major** → propose a new major-change note (title, date of change, the PRs it groups, a 2–3 line summary); **minor but it changes the current state** → propose a line for the overview's current state; **minor** → list it as no action.
+   - Also report: the README changed since the overview's snapshot date (propose a snapshot refresh); a repo that is archived, renamed, deleted or unreachable; anything in a new PR that looks like a secret (name the file and PR, never copy the value).
+   - A project with no merged PRs or commits since its read date is up to date; list it in one line.
 
 ## Report
 
@@ -34,10 +41,11 @@ Group findings by check, most severe first (contradictions and broken data befor
 Only after the user approves specific findings (or says "fix all safe ones"), apply them under the vault's append-only rule:
 
 - *Allowed without extra ask once approved:* normalise a `created` date, add a missing tag/callout pair, add a note to `index.md` or a MOC, add a Related link, add a missing tag to the Tags MOC, create a stub note for a missing concept (frontmatter + `status: seedling`, body left for the user or `ingest`).
+- *Project refresh (check 8), per project the user approves:* follow the vault `CLAUDE.md` "Re-ingesting a repo" rule — refresh the overview's README snapshot and current state, add the approved major-change notes, append them to the overview's **Major changes** list, `MOCs/Projects MOC.md` and `index.md` in order, and update the overview's `source` read date to today. Leave past change notes alone except for append-only corrections.
 - *Never without an explicit per-item instruction:* change a body, merge or delete notes, retag across many notes, move files, or resolve a contradiction (present both sides and the evidence; the user decides).
 
 List every file you changed and exactly what changed.
 
 ## Always: log the pass
 
-Append `## [DD/MM/YYYY] lint | <scope>` to `log.md` with 1–3 lines (findings by check, fixes applied). Create `log.md` from the vault `CLAUDE.md` format if it does not exist. This applies even when no fixes were approved.
+Append `## [DD/MM/YYYY] lint | <scope>` to `log.md` with 1–3 lines (findings by check, projects checked and how many new PRs each had, fixes applied). Create `log.md` from the vault `CLAUDE.md` format if it does not exist. This applies even when no fixes were approved.
